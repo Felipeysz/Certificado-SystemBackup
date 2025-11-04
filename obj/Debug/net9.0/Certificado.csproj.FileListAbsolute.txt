@@ -297,15 +297,12 @@ C:\Users\Felip\Desktop\Certificado\Certificado\bin\Debug\net9.0\Microsoft.Identi
 C:\Users\Felip\Desktop\Certificado\Certificado\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Felip\Desktop\Certificado\Certificado\bin\Debug\net9.0\FluentValidation.dll
 C:\Users\Felip\Desktop\Certificado\Certificado\bin\Debug\net9.0\FluentValidation.DependencyInjectionExtensions.dll
-C:\Users\Felip\Desktop\Certificado\Certificado\obj\Debug\net9.0\compressed\g1dbjf2gbt-kndtkavhwu.gz
 C:\Users\Felip\Desktop\Certificado\Certificado\bin\Debug\net9.0\PdfSharpCore.dll
 C:\Users\Felip\Desktop\Certificado\Certificado\bin\Debug\net9.0\ICSharpCode.SharpZipLib.dll
 C:\Users\Felip\Desktop\Certificado\Certificado\bin\Debug\net9.0\SixLabors.Fonts.dll
 C:\Users\Felip\Desktop\Certificado\Certificado\bin\Debug\net9.0\SixLabors.ImageSharp.dll
 C:\Users\Felip\Desktop\Certificado\Certificado\bin\Debug\net9.0\de\PdfSharpCore.resources.dll
-C:\Users\Felip\Desktop\Certificado\Certificado\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\Felip\Desktop\Certificado\Certificado\obj\Debug\net9.0\compressed\hxdmv47slr-0htyrum3uv.gz
-C:\Users\Felip\Desktop\Certificado\Certificado\obj\Debug\net9.0\compressed\jbqopupsvo-uvohvcka8y.gz
 C:\Users\Felip\Desktop\Certificado\Certificado\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Felip\Desktop\Certificado\Certificado\bin\Debug\net9.0\System.Drawing.Common.dll
 C:\Users\Felip\Desktop\Certificado\Certificado\bin\Debug\net9.0\System.Private.Windows.Core.dll
@@ -626,3 +623,9 @@ C:\Users\Felip\Desktop\Certificado - Copia\Certificado\obj\Debug\net9.0\compress
 C:\Users\Felip\Desktop\Certificado - Copia\Certificado\obj\Debug\net9.0\compressed\ckfw21sfbh-rz2nc6va5w.gz
 C:\Users\Felip\Desktop\Certificado - Copia\Certificado\obj\Debug\net9.0\compressed\yqou7n6ih0-euavorajc5.gz
 C:\Users\Felip\Desktop\Certificado - Copia\Certificado\obj\Debug\net9.0\compressed\jbqopupsvo-1gg80zoozr.gz
+C:\Users\Felip\Desktop\Certificado\Certificado\obj\Debug\net9.0\compressed\yqou7n6ih0-euavorajc5.gz
+C:\Users\Felip\Desktop\Certificado\Certificado\obj\Debug\net9.0\compressed\h18lqya6fz-6ydakkpw5j.gz
+C:\Users\Felip\Desktop\Certificado\Certificado\obj\Debug\net9.0\compressed\tcvzz5kds0-zkw9v4joyv.gz
+C:\Users\Felip\Desktop\Certificado\Certificado\obj\Debug\net9.0\compressed\ckfw21sfbh-rz2nc6va5w.gz
+C:\Users\Felip\Desktop\Certificado\Certificado\obj\Debug\net9.0\compressed\1thnwgxb7y-1n4az639r3.gz
+C:\Users\Felip\Desktop\Certificado\Certificado\obj\Debug\net9.0\compressed\jbqopupsvo-1gg80zoozr.gz
