@@ -1,7 +1,28 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado - copia\\certificado\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado - copia\\certificado\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado - copia\\certificado\\service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado - copia\\certificado\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado - copia\\certificado\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:.env||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +30,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-05T16:28:45.111Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAQwEEAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-05T16:27:34.822Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Service\\AuthService.cs",
+              "RelativeDocumentMoniker": "Service\\AuthService.cs",
+              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Service\\AuthService.cs",
+              "RelativeToolTip": "Service\\AuthService.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAEsAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-05T16:26:07.508Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": ".env",
+              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\.env",
+              "RelativeDocumentMoniker": ".env",
+              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\.env",
+              "RelativeToolTip": ".env",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-05T16:25:55.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAA6wBAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-05T16:25:48.361Z",
+              "EditorCaption": ""
             }
           ]
         }

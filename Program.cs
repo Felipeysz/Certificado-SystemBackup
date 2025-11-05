@@ -6,32 +6,50 @@ using DotNetEnv.Configuration;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.AspNetCore.DataProtection;
+using System.IO;
 
 // Carregar variáveis do .env
 Env.Load();
+var builder = WebApplication.CreateBuilder(args);
 
 // MVC
 builder.Services.AddControllersWithViews();
-
 builder.Configuration.AddDotNetEnv();
 
-// Banco SQLite
+// --- Configuração do SQLite com caminho absoluto ---
 var connectionString = Environment.GetEnvironmentVariable("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(connectionString));
+if (string.IsNullOrWhiteSpace(connectionString))
+{
+    throw new InvalidOperationException("DefaultConnection não configurado no .env");
+}
 
-// Injeção de dependências
+// Se for relativo, converte para caminho absoluto dentro de um diretório gravável
+if (!Path.IsPathRooted(connectionString))
+{
+    var dbFolder = Path.Combine(Directory.GetCurrentDirectory(), "data");
+    Directory.CreateDirectory(dbFolder);
+    connectionString = Path.Combine(dbFolder, connectionString);
+}
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlite($"Data Source={connectionString}"));
+
+// --- Data Protection para antiforgery e cookies ---
+var keysFolder = Path.Combine(Directory.GetCurrentDirectory(), "keys");
+Directory.CreateDirectory(keysFolder);
+builder.Services.AddDataProtection()
+       .PersistKeysToFileSystem(new DirectoryInfo(keysFolder))
+       .SetApplicationName("CertificadoSystem");
+
+// --- Injeção de dependências ---
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<AuthService>();
-
 builder.Services.AddScoped<ICertificateRepository, CertificateRepository>();
 builder.Services.AddScoped<CertificateService>();
-
 builder.Services.AddValidatorsFromAssemblyContaining<AuthService>();
 
-// Autenticação por cookie
+// --- Autenticação por cookie ---
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -47,13 +65,14 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
+// --- Criar banco e aplicar migrations automaticamente ---
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    db.Database.Migrate();
+    db.Database.Migrate(); // cria o banco e as tabelas, incluindo Users
 }
 
-// Middleware de tratamento de erros para produção
+// Middleware de erro
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/ErrorPage/Index");
@@ -62,10 +81,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
-// Ordem obrigatória
 app.UseAuthentication();
 app.UseAuthorization();
 
