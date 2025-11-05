@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado\\certificado\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado\\certificado\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:.env||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado\\certificado\\service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado\\certificado\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado\\certificado\\certificado.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:certificado.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado\\certificado\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado\\certificado\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado\\certificado\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,51 +43,77 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Dockerfile",
-              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Dockerfile",
-              "RelativeDocumentMoniker": "Dockerfile",
-              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Dockerfile",
-              "RelativeToolTip": "Dockerfile",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAuAAAAAAAAAA==",
+              "Title": ".env",
+              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\.env",
+              "RelativeDocumentMoniker": ".env",
+              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\.env",
+              "RelativeToolTip": ".env",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-11-05T02:40:34.661Z",
+              "WhenOpened": "2025-11-05T02:44:40.944Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Certificado",
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Service\\AuthService.cs",
+              "RelativeDocumentMoniker": "Service\\AuthService.cs",
+              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Service\\AuthService.cs",
+              "RelativeToolTip": "Service\\AuthService.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAQwEcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-05T02:44:20.96Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-05T02:43:56.97Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Certificado.csproj",
               "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Certificado.csproj",
               "RelativeDocumentMoniker": "Certificado.csproj",
               "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Certificado.csproj",
               "RelativeToolTip": "Certificado.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2025-11-05T02:39:23.57Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAQwEAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-05T02:39:14.05Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
               "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBIAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwAwAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-04T23:59:27.977Z",
               "EditorCaption": ""
