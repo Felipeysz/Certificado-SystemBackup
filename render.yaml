@@ -1,0 +1,21 @@
+# Exported from Render on 2025-11-05T18:29:33Z
+version: "1"
+projects:
+- name: My project
+  environments:
+  - name: Production
+    services:
+    - type: web
+      name: Certificado-System
+      runtime: docker
+      repo: https://github.com/Felipeysz/Certificado-System
+      plan: free
+      envVars:
+      - key: JWT_KEY
+        sync: false
+      - key: DEFAULTCONNECTION
+        sync: false
+      region: oregon
+      dockerContext: .
+      dockerfilePath: ./Dockerfile
+      autoDeployTrigger: commit
