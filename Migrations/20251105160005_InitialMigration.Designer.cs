@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Certificado.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251105045707_Initial")]
-    partial class Initial
+    [Migration("20251105160005_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -627,3 +627,4 @@ C:\Users\Felip\Desktop\Certificado - Copia\Certificado\bin\Debug\net9.0\SixLabor
 C:\Users\Felip\Desktop\Certificado - Copia\Certificado\bin\Debug\net9.0\DotNetEnv.dll
 C:\Users\Felip\Desktop\Certificado - Copia\Certificado\bin\Debug\net9.0\Sprache.dll
 C:\Users\Felip\Desktop\Certificado - Copia\Certificado\obj\Debug\net9.0\compressed\jbqopupsvo-gcm3mtlc5l.gz
+C:\Users\Felip\Desktop\Certificado - Copia\Certificado\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

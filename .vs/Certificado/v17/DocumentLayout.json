@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado - copia\\certificado\\wwwroot\\js\\certificate-form.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:wwwroot\\js\\certificate-form.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado - copia\\certificado\\views\\certificados\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:views\\certificados\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado - copia\\certificado\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,27 +23,15 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "certificate-form.js",
-              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\wwwroot\\js\\certificate-form.js",
-              "RelativeDocumentMoniker": "wwwroot\\js\\certificate-form.js",
-              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\wwwroot\\js\\certificate-form.js",
-              "RelativeToolTip": "wwwroot\\js\\certificate-form.js",
-              "ViewState": "AgIAAMAAAAAAAAAAAAAgwMYAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-05T03:56:42.83Z",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-05T16:03:43.101Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Views\\Certificados\\Create.cshtml",
-              "RelativeDocumentMoniker": "Views\\Certificados\\Create.cshtml",
-              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Views\\Certificados\\Create.cshtml",
-              "RelativeToolTip": "Views\\Certificados\\Create.cshtml",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAQwBcAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-05T03:19:35.033Z"
             }
           ]
         }
