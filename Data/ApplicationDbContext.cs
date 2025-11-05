@@ -20,13 +20,14 @@ namespace AuthDemo.Data
                 .HasConversion<string>()
                 .HasMaxLength(20);
 
-            // Usuário administrador padrão
-            var adminPassword = HashPassword("admin123");
+            // Criação de uma conta padrão de administrador
+            var adminPassword = HashPassword("Adm!n#2025$Secure"); // senha forte e única
+
             modelBuilder.Entity<User>().HasData(new User
             {
                 Id = 1,
                 Username = "admin",
-                Email = "admin@local",
+                Email = "admin@neoauth.local",
                 PasswordHash = adminPassword,
                 Permission = UserPermission.Admin
             });

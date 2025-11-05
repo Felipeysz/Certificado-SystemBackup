@@ -57,7 +57,7 @@ namespace Certificado.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "PasswordHash", "Permission", "Username" },
-                values: new object[] { 1, "admin@local", "JAvlGPq9JyTdtvBO6x2llnRI1+gxwIyPqCKAn3THIKk=", "Admin", "admin" });
+                values: new object[] { 1, "admin@neoauth.local", "7UJyiYcYaU29pOxBRAZ7eDaHGvRx7hrMoESDIpT/N8U=", "Admin", "admin" });
         }
 
         /// <inheritdoc />

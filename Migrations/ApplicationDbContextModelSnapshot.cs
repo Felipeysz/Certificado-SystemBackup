@@ -106,8 +106,8 @@ namespace Certificado.Migrations
                         new
                         {
                             Id = 1,
-                            Email = "admin@local",
-                            PasswordHash = "JAvlGPq9JyTdtvBO6x2llnRI1+gxwIyPqCKAn3THIKk=",
+                            Email = "admin@neoauth.local",
+                            PasswordHash = "7UJyiYcYaU29pOxBRAZ7eDaHGvRx7hrMoESDIpT/N8U=",
                             Permission = "Admin",
                             Username = "admin"
                         });

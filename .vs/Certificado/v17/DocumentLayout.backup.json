@@ -1,25 +1,25 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\",
+  "WorkspaceRootPath": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado - copia\\certificado\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado\\certificado\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado - copia\\certificado\\views\\certificados\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado\\certificado\\views\\certificados\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:views\\certificados\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado - copia\\certificado\\views\\errorpage\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado\\certificado\\views\\errorpage\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:views\\errorpage\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado - copia\\certificado\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado\\certificado\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado - copia\\certificado\\views\\users\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado\\certificado\\views\\users\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1C41ED20-4134-4CE7-8855-472819341F35}|Certificado.csproj|solutionrelative:views\\users\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
@@ -40,61 +40,57 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Views\\Users\\Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Views\\Users\\Create.cshtml",
               "RelativeDocumentMoniker": "Views\\Users\\Create.cshtml",
-              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Views\\Users\\Create.cshtml",
+              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Views\\Users\\Create.cshtml",
               "RelativeToolTip": "Views\\Users\\Create.cshtml",
               "ViewState": "AgIAABMAAAAAAAAAAAAAwDQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-04T23:42:41.966Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T23:42:41.966Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Views\\Home\\Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "Views\\Home\\Index.cshtml",
               "ViewState": "AgIAAIQAAAAAAAAAAAAQwKUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-04T23:42:38.721Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T23:42:38.721Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Views\\ErrorPage\\Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Views\\ErrorPage\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\ErrorPage\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Views\\ErrorPage\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Views\\ErrorPage\\Index.cshtml",
               "RelativeToolTip": "Views\\ErrorPage\\Index.cshtml",
               "ViewState": "AgIAADoAAAAAAAAAAAAQwFsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-04T23:42:36.931Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T23:42:36.931Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Views\\Certificados\\Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Views\\Certificados\\Create.cshtml",
               "RelativeDocumentMoniker": "Views\\Certificados\\Create.cshtml",
-              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Views\\Certificados\\Create.cshtml",
+              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Views\\Certificados\\Create.cshtml",
               "RelativeToolTip": "Views\\Certificados\\Create.cshtml",
               "ViewState": "AgIAAHcAAAAAAAAAAAAAwJgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-04T23:42:32.671Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T23:42:32.671Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Views\\Auth\\Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Views\\Auth\\Login.cshtml",
               "RelativeDocumentMoniker": "Views\\Auth\\Login.cshtml",
-              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado - Copia\\Certificado\\Views\\Auth\\Login.cshtml",
+              "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado\\Views\\Auth\\Login.cshtml",
               "RelativeToolTip": "Views\\Auth\\Login.cshtml",
               "ViewState": "AgIAACEAAAAAAAAAAAAIwEIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
