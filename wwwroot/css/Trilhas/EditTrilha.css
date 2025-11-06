@@ -1,0 +1,368 @@
+﻿/* ===== Trilhas Edit Styles - NeoAuth Theme Integration ===== */
+/* Requer: theme-variables.css */
+
+body {
+    font-family: var(--font-primary);
+    background: linear-gradient(135deg, var(--warning), var(--warning-dark));
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: var(--text-primary);
+    position: relative;
+    overflow-x: hidden;
+}
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.15) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+/* Container */
+.container {
+    position: relative;
+    z-index: var(--z-base);
+    animation: fadeIn var(--transition-base);
+}
+
+/* Card Principal */
+.card.shadow {
+    background: var(--bg-primary);
+    border: none;
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    animation: slideUp var(--transition-base);
+    backdrop-filter: blur(10px);
+}
+
+/* Header - Warning */
+.card-header.bg-warning {
+    background: linear-gradient(135deg, var(--warning), var(--warning-dark)) !important;
+    border: none;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+    .card-header.bg-warning::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 70%);
+        animation: pulse 3s infinite;
+    }
+
+.card-header h3 {
+    color: var(--white);
+    font-weight: var(--font-bold);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 1;
+}
+
+    .card-header h3 i {
+        animation: bounce 2s infinite;
+    }
+
+/* Card Body */
+.card-body {
+    padding: 2.5rem;
+    z-index: 1;
+    position: relative;
+}
+
+/* Alertas */
+.alert {
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    border: none;
+    animation: fadeIn var(--transition-fast);
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, var(--danger-light), var(--danger));
+    color: var(--danger-dark);
+    border-left: 4px solid var(--danger);
+}
+
+/* Formulário */
+.form-label {
+    color: var(--text-primary);
+    font-weight: var(--font-semibold);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+    .form-label i {
+        color: var(--warning);
+    }
+
+.form-control {
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 0.875rem 1.25rem;
+    transition: all var(--transition-base);
+    font-size: 1rem;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+    .form-control:focus {
+        border-color: var(--warning);
+        box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
+        outline: none;
+    }
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Switch */
+.form-check-input {
+    width: 3rem;
+    height: 1.5rem;
+    cursor: pointer;
+    border: 2px solid var(--border);
+    transition: all var(--transition-fast);
+}
+
+    .form-check-input:checked {
+        background-color: var(--success);
+        border-color: var(--success);
+    }
+
+    .form-check-input:focus {
+        box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+    }
+
+/* Certificados */
+.certificate-card {
+    transition: all var(--transition-base);
+    cursor: pointer;
+    border: 2px solid var(--primary) !important;
+    border-radius: var(--radius-xl) !important;
+    background: var(--bg-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+    .certificate-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(79,70,229,0.05), rgba(99,102,241,0.05));
+        opacity: 0;
+        transition: opacity var(--transition-fast);
+        pointer-events: none;
+    }
+
+    .certificate-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--primary-dark) !important;
+    }
+
+        .certificate-card:hover::before {
+            opacity: 1;
+        }
+
+/* Badges */
+.badge {
+    border-radius: var(--radius-full);
+    font-weight: var(--font-semibold);
+    transition: all var(--transition-fast);
+}
+
+    .badge.bg-info {
+        background: linear-gradient(135deg, var(--info), var(--info-dark)) !important;
+    }
+
+    .badge.bg-secondary {
+        background: linear-gradient(135deg, var(--secondary), var(--gray-700)) !important;
+    }
+
+/* Botões */
+.btn-warning {
+    background: linear-gradient(135deg, var(--warning), var(--warning-dark));
+    border: none;
+    color: var(--white);
+    font-weight: var(--font-bold);
+    padding: 1rem 2rem;
+    border-radius: var(--radius-xl);
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 14px rgba(245,158,11,0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+    .btn-warning::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+
+    .btn-warning:hover::before {
+        width: 400px;
+        height: 400px;
+    }
+
+    .btn-warning:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(245,158,11,0.5);
+    }
+
+    .btn-warning i {
+        margin-right: 0.5rem;
+        transition: transform var(--transition-fast);
+    }
+
+    .btn-warning:hover i {
+        transform: scale(1.1);
+    }
+
+/* Linhas divisórias */
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 2rem 0;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes pulse {
+    0%,100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.9;
+        transform: scale(1.05);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .card-header {
+        padding: 1.5rem;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .btn-warning {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    .card.shadow {
+        background: var(--gray-800);
+    }
+
+    .card-header h3 {
+        color: var(--warning-light);
+    }
+
+    .certificate-card {
+        background: var(--gray-800);
+        border-color: var(--primary-dark) !important;
+    }
+
+    .form-control {
+        background: var(--gray-900);
+        color: var(--white);
+        border-color: var(--gray-700);
+    }
+
+        .form-control:focus {
+            background: var(--gray-800);
+        }
+}
+
+/* Loading */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    position: relative;
+}
+
+    .loading::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 40px;
+        height: 40px;
+        margin: -20px;
+        border: 4px solid var(--warning-light);
+        border-top-color: var(--warning);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

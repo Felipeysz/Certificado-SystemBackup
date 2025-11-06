@@ -1,0 +1,63 @@
+﻿@model List<AuthDemo.Models.Trilha>
+@{
+    ViewData["Title"] = "Trilhas Disponíveis";
+}
+
+@section Styles {
+    <link href="~/css/Trilhas/TrilhasPublicas.css" rel="stylesheet" />
+    <link href="~/css/ThemaVarieble.css" rel="stylesheet" />
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4">
+            <i class="fas fa-graduation-cap"></i> Trilhas Disponíveis
+        </h1>
+        <p class="lead">
+            Selecione uma trilha para obter todos os certificados
+        </p>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row">
+            @foreach (var trilha in Model)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 hover-card">
+                        <div class="card-header bg-success">
+                            <h5>
+                                <i class="fas fa-route"></i>
+                                @trilha.Nome
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <p>@(trilha.Descricao ?? "Obtenha todos os certificados desta trilha")</p>
+
+                            <div class="info-badge">
+                                <i class="fas fa-certificate"></i>
+                                <strong>@trilha.CertificadosIdsList.Count</strong>
+                                certificado@(trilha.CertificadosIdsList.Count != 1 ? "s" : "")
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="@Url.Action("Detalhes", "Trilhas", new { id = trilha.Id })"
+                               class="btn btn-success w-100">
+                                <i class="fas fa-arrow-right"></i>
+                                Ver Trilha
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            <i class="fas fa-info-circle"></i>
+            <h4>Nenhuma trilha disponível no momento</h4>
+            <p class="mb-0">Novas trilhas serão adicionadas em breve!</p>
+        </div>
+    }
+</div>

@@ -1,152 +1,166 @@
 ﻿@model AuthDemo.DTOs.CertificateDto
+@{
+    var googleFonts = new List<string> {
+        "Arial", "Roboto", "Open Sans", "Montserrat", "Lato", "Poppins",
+        "Courier New", "Georgia", "Times New Roman"
+    };
 
-<div class="neo-form-section">
+    var optionalFields = new List<dynamic> {
+        new {
+            Property = "CargaHoraria",
+            Label = "Carga Horária",
+            Icon = "clock",
+            Type = "number",
+            Placeholder = "Ex: 40",
+            FontSize = 14
+        },
+        new {
+            Property = "DataInicio",
+            Label = "Data de Início",
+            Icon = "calendar-check",
+            Type = "date",
+            Placeholder = "",
+            FontSize = 12
+        },
+        new {
+            Property = "DataTermino",
+            Label = "Data de Término",
+            Icon = "calendar-x",
+            Type = "date",
+            Placeholder = "",
+            FontSize = 12
+        },
+        new {
+            Property = "EnderecoInstituicao",
+            Label = "Endereço",
+            Icon = "geo-alt",
+            Type = "text",
+            Placeholder = "Rua, Número, Bairro",
+            FontSize = 11
+        },
+        new {
+            Property = "Cidade",
+            Label = "Cidade",
+            Icon = "building",
+            Type = "text",
+            Placeholder = "Ex: São Paulo - SP",
+            FontSize = 12
+        },
+        new {
+            Property = "NomeResponsavel",
+            Label = "Responsável",
+            Icon = "person-check",
+            Type = "text",
+            Placeholder = "Nome completo",
+            FontSize = 14
+        },
+        new {
+            Property = "CargoResponsavel",
+            Label = "Cargo",
+            Icon = "briefcase",
+            Type = "text",
+            Placeholder = "Ex: Diretor Acadêmico",
+            FontSize = 12
+        },
+        new {
+            Property = "CodigoCertificado",
+            Label = "Código",
+            Icon = "upc-scan",
+            Type = "text",
+            Placeholder = "Ex: CERT-2025-001",
+            FontSize = 10
+        }
+    };
+}
 
-    @* === Campos Opcionais === *@
-    <div class="collapse fade" id="optionalFields">
-        <hr />
-        <div class="row g-4">
+<div class="collapse fade" id="optionalFields">
+    <div class="alert alert-info mb-3">
+        <i class="bi bi-info-circle me-2"></i>
+        <small>Campos opcionais personalizáveis</small>
+    </div>
 
-            @* Carga Horária *@
+    <div class="row g-3">
+        @foreach (var field in optionalFields)
+        {
             <div class="col-md-6 fade-in-up">
-                <label asp-for="CargaHoraria" class="form-label neo-label">Carga Horária</label>
-                <input asp-for="CargaHoraria" type="number" class="form-control neo-input draggable-input" data-field-id="CargaHoraria" />
+                <label class="form-label">
+                    <i class="bi bi-@field.Icon me-1"></i>@field.Label
+                </label>
 
-                <div class="d-flex flex-wrap gap-2 mt-2">
-                    <input type="number" class="form-control field-font-size" data-field-id="CargaHoraria" placeholder="Tamanho (px)" value="16" />
-                </div>
+                <input type="@field.Type"
+                       name="@field.Property"
+                       class="form-control form-control-sm draggable-input"
+                       data-field-id="@field.Property"
+                       placeholder="@field.Placeholder"
+                       @(field.Type == "date" && Model != null ? $"value=\"{DateTime.Now:yyyy-MM-dd}\"" : "") />
 
-                <div class="form-check mt-2">
-                    <input type="checkbox" class="form-check-input show-on-certificate" id="showCargaHoraria" />
-                    <label class="form-check-label" for="showCargaHoraria">Mostrar no Certificado</label>
+                <div class="row g-1 mt-1">
+                    <div class="col-5">
+                        <select class="form-select form-select-sm field-font" data-field-id="@field.Property">
+                            @foreach (var font in googleFonts)
+                            {
+                                <option value="@font" style="font-family:'@font';">@font</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <input type="number" class="form-control form-control-sm field-font-size"
+                               data-field-id="@field.Property" placeholder="Tam."
+                               value="@field.FontSize" min="8" max="72" />
+                    </div>
+                    <div class="col-2">
+                        <input type="color" class="form-control form-control-sm field-color"
+                               data-field-id="@field.Property"
+                               value="@(field.Property == "CodigoCertificado" ? "#666666" : "#000000")" />
+                    </div>
+                    <div class="col-2 text-center">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input show-on-certificate"
+                                   id="show@field.Property" />
+                            <label class="form-check-label" for="show@field.Property" title="Mostrar">
+                                <i class="bi bi-eye-fill"></i>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
+        }
 
-            @* Data de Início *@
-            <div class="col-md-6 fade-in-up">
-                <label asp-for="DataInicio" class="form-label neo-label">Data de Início</label>
-                <input asp-for="DataInicio" type="date" class="form-control neo-input draggable-input" data-field-id="DataInicio" />
+        <div class="col-12 mt-4">
+            <hr />
+            <h6 class="text-primary mb-3">
+                <i class="bi bi-image me-2"></i>Imagens
+            </h6>
+        </div>
 
-                <div class="d-flex flex-wrap gap-2 mt-2">
-                    <input type="number" class="form-control field-font-size" data-field-id="DataInicio" placeholder="Tamanho (px)" value="16" />
-                </div>
-
-                <div class="form-check mt-2">
-                    <input type="checkbox" class="form-check-input show-on-certificate" id="showDataInicio" />
-                    <label class="form-check-label" for="showDataInicio">Mostrar no Certificado</label>
-                </div>
+        @* Logo da Instituição *@
+        <div class="col-md-6 fade-in-up">
+            <label class="form-label">
+                <i class="bi bi-building me-1"></i>Logo da Instituição
+            </label>
+            <input type="file" name="logoFile" class="form-control form-control-sm" accept="image/*" />
+            <small class="text-muted d-block mt-1">JPG, PNG ou SVG</small>
+            <div class="form-check mt-2">
+                <input type="checkbox" class="form-check-input show-on-certificate" id="showLogoInstituicao" />
+                <label class="form-check-label" for="showLogoInstituicao">
+                    <i class="bi bi-eye me-1"></i>Mostrar
+                </label>
             </div>
+        </div>
 
-            @* Data de Término *@
-            <div class="col-md-6 fade-in-up">
-                <label asp-for="DataTermino" class="form-label neo-label">Data de Término</label>
-                <input asp-for="DataTermino" type="date" class="form-control neo-input draggable-input" data-field-id="DataTermino" />
-
-                <div class="d-flex flex-wrap gap-2 mt-2">
-                    <input type="number" class="form-control field-font-size" data-field-id="DataTermino" placeholder="Tamanho (px)" value="16" />
-                </div>
-
-                <div class="form-check mt-2">
-                    <input type="checkbox" class="form-check-input show-on-certificate" id="showDataTermino" />
-                    <label class="form-check-label" for="showDataTermino">Mostrar no Certificado</label>
-                </div>
+        @* Assinatura *@
+        <div class="col-md-6 fade-in-up">
+            <label class="form-label">
+                <i class="bi bi-pen me-1"></i>Assinatura Digital
+            </label>
+            <input type="file" name="assinaturaFile" class="form-control form-control-sm" accept="image/*" />
+            <small class="text-muted d-block mt-1">Imagem da assinatura</small>
+            <div class="form-check mt-2">
+                <input type="checkbox" class="form-check-input show-on-certificate" id="showAssinatura" />
+                <label class="form-check-label" for="showAssinatura">
+                    <i class="bi bi-eye me-1"></i>Mostrar
+                </label>
             </div>
-
-            @* Endereço *@
-            <div class="col-md-6 fade-in-up">
-                <label asp-for="EnderecoInstituicao" class="form-label neo-label">Endereço</label>
-                <input asp-for="EnderecoInstituicao" class="form-control neo-input draggable-input" data-field-id="EnderecoInstituicao" />
-
-                <div class="d-flex flex-wrap gap-2 mt-2">
-                    <input type="number" class="form-control field-font-size" data-field-id="EnderecoInstituicao" placeholder="Tamanho (px)" value="16" />
-                </div>
-
-                <div class="form-check mt-2">
-                    <input type="checkbox" class="form-check-input show-on-certificate" id="showEnderecoInstituicao" />
-                    <label class="form-check-label" for="showEnderecoInstituicao">Mostrar no Certificado</label>
-                </div>
-            </div>
-
-            @* Cidade *@
-            <div class="col-md-6 fade-in-up">
-                <label asp-for="Cidade" class="form-label neo-label">Cidade</label>
-                <input asp-for="Cidade" class="form-control neo-input draggable-input" data-field-id="Cidade" />
-
-                <div class="d-flex flex-wrap gap-2 mt-2">
-                    <input type="number" class="form-control field-font-size" data-field-id="Cidade" placeholder="Tamanho (px)" value="16" />
-                </div>
-
-                <div class="form-check mt-2">
-                    <input type="checkbox" class="form-check-input show-on-certificate" id="showCidade" />
-                    <label class="form-check-label" for="showCidade">Mostrar no Certificado</label>
-                </div>
-            </div>
-
-            @* Logo da Instituição *@
-            <div class="col-md-6 fade-in-up">
-                <label asp-for="LogoInstituicao" class="form-label neo-label">Logo da Instituição</label>
-                <input type="file" name="logoFile" class="form-control neo-input" accept="image/*" />
-                <div class="form-check mt-2">
-                    <input type="checkbox" class="form-check-input show-on-certificate" id="showLogoInstituicao" />
-                    <label class="form-check-label" for="showLogoInstituicao">Mostrar no Certificado</label>
-                </div>
-            </div>
-
-            @* Assinatura *@
-            <div class="col-md-6 fade-in-up">
-                <label asp-for="Assinatura" class="form-label neo-label">Assinatura (opcional)</label>
-                <input type="file" name="assinaturaFile" class="form-control neo-input" accept="image/*" />
-                <div class="form-check mt-2">
-                    <input type="checkbox" class="form-check-input show-on-certificate" id="showAssinatura" />
-                    <label class="form-check-label" for="showAssinatura">Mostrar no Certificado</label>
-                </div>
-            </div>
-
-            @* Nome do Responsável *@
-            <div class="col-md-6 fade-in-up">
-                <label asp-for="NomeResponsavel" class="form-label neo-label">Nome do Responsável</label>
-                <input asp-for="NomeResponsavel" class="form-control neo-input draggable-input" data-field-id="NomeResponsavel" />
-
-                <div class="d-flex flex-wrap gap-2 mt-2">
-                    <input type="number" class="form-control field-font-size" data-field-id="NomeResponsavel" placeholder="Tamanho (px)" value="16" />
-                </div>
-
-                <div class="form-check mt-2">
-                    <input type="checkbox" class="form-check-input show-on-certificate" id="showNomeResponsavel" />
-                    <label class="form-check-label" for="showNomeResponsavel">Mostrar no Certificado</label>
-                </div>
-            </div>
-
-            @* Cargo do Responsável *@
-            <div class="col-md-6 fade-in-up">
-                <label asp-for="CargoResponsavel" class="form-label neo-label">Cargo do Responsável</label>
-                <input asp-for="CargoResponsavel" class="form-control neo-input draggable-input" data-field-id="CargoResponsavel" />
-
-                <div class="d-flex flex-wrap gap-2 mt-2">
-                    <input type="number" class="form-control field-font-size" data-field-id="CargoResponsavel" placeholder="Tamanho (px)" value="16" />
-                </div>
-
-                <div class="form-check mt-2">
-                    <input type="checkbox" class="form-check-input show-on-certificate" id="showCargoResponsavel" />
-                    <label class="form-check-label" for="showCargoResponsavel">Mostrar no Certificado</label>
-                </div>
-            </div>
-
-            @* Código do Certificado *@
-            <div class="col-md-6 fade-in-up">
-                <label asp-for="CodigoCertificado" class="form-label neo-label">Código do Certificado</label>
-                <input asp-for="CodigoCertificado" class="form-control neo-input draggable-input" data-field-id="CodigoCertificado" />
-
-                <div class="d-flex flex-wrap gap-2 mt-2">
-                    <input type="number" class="form-control field-font-size" data-field-id="CodigoCertificado" placeholder="Tamanho (px)" value="16" />
-                </div>
-
-                <div class="form-check mt-2">
-                    <input type="checkbox" class="form-check-input show-on-certificate" id="showCodigoCertificado" />
-                    <label class="form-check-label" for="showCodigoCertificado">Mostrar no Certificado</label>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>

@@ -1,0 +1,233 @@
+﻿/* =========================
+   NeoAuth - Criar Certificado Visual
+   Usa theme-variables.css
+   ========================= */
+
+/* ===== Layout Base ===== */
+.neo-container {
+    max-width: 1300px;
+    padding: 1rem;
+    margin: 0 auto;
+}
+
+.dashboard-title {
+    font-weight: var(--font-extrabold);
+    color: var(--text-primary);
+    letter-spacing: var(--tracking-tight);
+}
+
+.btn-logout {
+    border-radius: var(--radius-lg);
+    font-weight: var(--font-semibold);
+    transition: all var(--transition-fast);
+}
+
+    .btn-logout:hover {
+        background-color: var(--gray-100);
+    }
+
+/* ===== Cards ===== */
+.neo-card {
+    background: var(--white);
+    border-radius: var(--radius-2xl);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+    .neo-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+
+/* ===== Alerts ===== */
+.neoalert-success {
+    background: var(--success-soft);
+    color: var(--success-dark);
+    border-left: 4px solid var(--success);
+    border-radius: var(--radius-lg);
+    padding: 0.75rem 1rem;
+    font-weight: var(--font-medium);
+}
+
+/* ===== Formulários ===== */
+.form-label {
+    color: var(--text-secondary);
+    font-weight: var(--font-semibold);
+}
+
+.form-control, .form-select {
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
+}
+
+    .form-control:focus, .form-select:focus {
+        border-color: var(--primary);
+        box-shadow: var(--focus-ring);
+        background-color: var(--white);
+    }
+
+/* ===== Seções ===== */
+.bg-light {
+    background-color: var(--gray-50) !important;
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Draggables e Pré-visualização ===== */
+.certificate-preview-area {
+    min-height: 450px;
+    background: var(--gray-50);
+    border: 2px dashed var(--border-light);
+    border-radius: var(--radius-xl);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview-placeholder {
+    color: var(--text-muted);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.pdf-preview-canvas {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+}
+
+.draggable-field {
+    position: absolute;
+    cursor: move;
+    user-select: none;
+    z-index: 10;
+}
+
+.draggable-text {
+    font-weight: var(--font-semibold);
+    background: rgba(255, 255, 255, 0.5);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    transition: transform var(--transition-fast);
+}
+
+    .draggable-text:hover {
+        transform: scale(1.05);
+    }
+
+.drag-handle {
+    display: none;
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    padding: 4px;
+    font-size: 0.7rem;
+}
+
+.draggable-field:hover .drag-handle {
+    display: block;
+}
+
+/* ===== Position Info ===== */
+#positionInfo {
+    border: 1px solid var(--border-light);
+    font-size: 0.85rem;
+    background-color: var(--gray-50);
+}
+
+/* ===== Botões ===== */
+.btn {
+    border-radius: var(--radius-lg);
+    font-weight: var(--font-semibold);
+    transition: all var(--transition-base);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    color: var(--white);
+}
+
+    .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-lg);
+    }
+
+.btn-success {
+    background: linear-gradient(135deg, var(--success), var(--success-dark));
+    border: none;
+}
+
+.btn-outline-success:hover {
+    background-color: var(--success-soft);
+}
+
+.btn-outline-primary {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+    .btn-outline-primary:hover {
+        background-color: var(--primary-soft);
+        color: var(--primary-dark);
+    }
+
+/* ===== Toggle de Campos ===== */
+.show-on-certificate {
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+}
+
+    .show-on-certificate:checked + label i {
+        color: var(--primary);
+        transform: scale(1.2);
+    }
+
+/* ===== Sticky Preview ===== */
+.sticky-preview {
+    position: sticky;
+    top: 2rem;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 992px) {
+    .sticky-preview {
+        position: static;
+    }
+}

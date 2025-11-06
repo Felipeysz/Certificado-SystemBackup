@@ -75,6 +75,42 @@ namespace Certificado.Migrations
                     b.ToTable("Certificates");
                 });
 
+            modelBuilder.Entity("AuthDemo.Models.Trilha", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Ativa")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CertificadosIds")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CriadoPorId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Descricao")
+                        .HasMaxLength(500)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Trilhas");
+                });
+
             modelBuilder.Entity("AuthDemo.Models.User", b =>
                 {
                     b.Property<int>("Id")

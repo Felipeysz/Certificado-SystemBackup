@@ -1,0 +1,154 @@
+﻿@model List<AuthDemo.Models.Trilha>
+
+@section Styles {
+    <link href="~/css/Trilhas/IndexTrilha.css" rel="stylesheet" />
+    <link href="~/css/ThemaVarieble.css" rel="stylesheet" />
+}
+
+@{
+    ViewData["Title"] = "Gerenciar Trilhas";
+    var isAdmin = User.IsInRole("Admin");
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>
+            <i class="fas fa-route"></i> Trilhas de Certificados
+        </h2>
+        <div>
+            <a href="@Url.Action("Index", "Home")" class="btn btn-secondary me-2">
+                <i class="fas fa-home"></i> Voltar
+            </a>
+            <a href="@Url.Action("Create")" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Nova Trilha
+            </a>
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            <i class="fas fa-exclamation-triangle"></i> @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row">
+            @foreach (var trilha in Model)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm @(trilha.Ativa ? "border-success" : "border-secondary")">
+                        <div class="card-header @(trilha.Ativa ? "bg-success" : "bg-secondary") text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-graduation-cap"></i> @trilha.Nome
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            @if (!string.IsNullOrEmpty(trilha.Descricao))
+                            {
+                                <p class="card-text text-muted">@trilha.Descricao</p>
+                            }
+
+                            <div class="mb-3">
+                                <small class="text-muted">
+                                    <i class="fas fa-certificate"></i>
+                                    <strong>@trilha.CertificadosIdsList.Count</strong> certificado(s)
+                                </small>
+                                <br />
+                                <small class="text-muted">
+                                    <i class="fas fa-calendar"></i>
+                                    Criado em @trilha.DataCriacao.ToString("dd/MM/yyyy")
+                                </small>
+                                <br />
+                                <span class="badge @(trilha.Ativa ? "bg-success" : "bg-secondary") mt-2">
+                                    @(trilha.Ativa ? "✅ Ativa" : "❌ Inativa")
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <div class="d-grid gap-2">
+                                <!-- Botão Enviar Trilha (Copiar Link) -->
+                                <button class="btn btn-sm btn-info btn-copiar-link"
+                                        data-link="@Url.Action("Gerar", "Trilhas", new { id = trilha.Id }, Context.Request.Scheme)"
+                                        data-nome="@trilha.Nome">
+                                    <i class="fas fa-share-alt"></i> Enviar Trilha
+                                </button>
+
+                                <!-- Botões Editar e Excluir -->
+                                <div class="btn-group" role="group">
+                                    <a href="@Url.Action("Edit", new { id = trilha.Id })"
+                                       class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </a>
+                                    @if (isAdmin)
+                                    {
+                                        <form method="post"
+                                              action="@Url.Action("Delete", new { id = trilha.Id })"
+                                              style="display: inline;"
+                                              onsubmit="return confirm('Tem certeza que deseja excluir esta trilha?');">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i> Excluir
+                                            </button>
+                                        </form>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i>
+            Nenhuma trilha cadastrada.
+            <a href="@Url.Action("Create")" class="alert-link">Criar primeira trilha</a>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        // Copiar link da trilha ao clicar em "Enviar Trilha"
+        document.querySelectorAll('.btn-copiar-link').forEach(button => {
+            button.addEventListener('click', function() {
+                const link = this.getAttribute('data-link');
+                const nome = this.getAttribute('data-nome');
+
+                navigator.clipboard.writeText(link).then(() => {
+                    // Feedback visual
+                    const originalHtml = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check"></i> Link Copiado!';
+                    this.classList.remove('btn-info');
+                    this.classList.add('btn-success');
+
+                    // Mostra mensagem
+                    alert(`✅ Link da trilha "${nome}" copiado!\n\n${link}\n\nCompartilhe este link para que os alunos possam gerar seus certificados.`);
+
+                    // Volta ao normal após 3 segundos
+                    setTimeout(() => {
+                        this.innerHTML = originalHtml;
+                        this.classList.remove('btn-success');
+                        this.classList.add('btn-info');
+                    }, 3000);
+                }).catch(err => {
+                    console.error('Erro ao copiar:', err);
+                    alert('❌ Erro ao copiar link. Tente novamente.');
+                });
+            });
+        });
+    </script>
+}

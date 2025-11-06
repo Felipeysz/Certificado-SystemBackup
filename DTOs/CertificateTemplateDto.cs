@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AuthDemo.DTOs
 {
@@ -40,6 +41,6 @@ namespace AuthDemo.DTOs
         public string? CertificadoGeradoBase64 { get; set; }
 
         public string? NomeAlunoConfig { get; set; } // Recebe posição/font/cor/tamanho do nome do aluno
-
     }
+
 }

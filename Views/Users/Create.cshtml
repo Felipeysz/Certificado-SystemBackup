@@ -3,50 +3,149 @@
     ViewData["Title"] = "Criar Colaborador";
 }
 
-<div class="container mt-4" style="max-width: 600px;">
-    <h3>Criar Colaborador</h3>
-
-    <form method="post">
-        @Html.AntiForgeryToken()
-
-        <div class="mb-3">
-            <label asp-for="Username" class="form-label">Usuário</label>
-            <input asp-for="Username" class="form-control" />
-            <span asp-validation-for="Username" class="text-danger"></span>
+<div class="container mt-4">
+    <div class="card user-card">
+        <!-- Header -->
+        <div class="card-header">
+            <h3>Criar Colaborador</h3>
+            <p class="subtitle">Preencha os dados abaixo para criar um novo colaborador</p>
         </div>
 
-        <div class="mb-3">
-            <label asp-for="Email" class="form-label">E-mail</label>
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="Password" class="form-label">Senha</label>
-            <input asp-for="Password" type="password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-
-        @if (!ViewData.ModelState.IsValid)
+        <!-- Erros Gerais -->
+        @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
         {
             <div class="alert alert-danger">
-                @foreach (var e in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
                 {
-                    <div>@e.ErrorMessage</div>
+                    <div>@error.ErrorMessage</div>
                 }
             </div>
         }
 
-        <button type="submit" class="btn btn-primary">Criar Colaborador</button>
-        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary ms-2">Cancelar</a>
-    </form>
+        <!-- Formulário -->
+        <form method="post" id="createUserForm">
+            @Html.AntiForgeryToken()
+
+            <!-- Usuário -->
+            <div class="mb-3">
+                <label asp-for="Username" class="form-label">Usuário</label>
+                <input asp-for="Username"
+                       class="form-control"
+                       placeholder="Ex: joao.silva"
+                       autocomplete="username"
+                       required />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <!-- E-mail -->
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">E-mail</label>
+                <input asp-for="Email"
+                       type="email"
+                       class="form-control"
+                       placeholder="Ex: joao.silva@empresa.com"
+                       autocomplete="email"
+                       required />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <!-- Senha -->
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">Senha</label>
+                <input asp-for="Password"
+                       type="password"
+                       class="form-control"
+                       placeholder="Mínimo 6 caracteres"
+                       autocomplete="new-password"
+                       required />
+                <span asp-validation-for="Password" class="text-danger"></span>
+
+                <!-- Indicador de força da senha (opcional) -->
+                <div class="password-strength" id="passwordStrength" style="display: none;">
+                    <div class="password-strength-bar"></div>
+                </div>
+            </div>
+
+            <!-- Botões -->
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary" id="btnSubmit">
+                    ✓ Criar Colaborador
+                </button>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">
+                    ← Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
 </div>
 
 @section Styles {
-    <link href="~/css/CreateUser.css" rel="stylesheet" />
+    <link href="~/css/User/CreateUser.css" rel="stylesheet" />
+    <link href="~/css/ThemaVarieble.css" rel="stylesheet" />
 }
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Validação em tempo real e indicador de força da senha
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('createUserForm');
+            const passwordInput = document.querySelector('input[name="Password"]');
+            const strengthIndicator = document.getElementById('passwordStrength');
+            const submitBtn = document.getElementById('btnSubmit');
+
+            // Indicador de força da senha
+            if (passwordInput && strengthIndicator) {
+                passwordInput.addEventListener('input', function() {
+                    const password = this.value;
+
+                    if (password.length === 0) {
+                        strengthIndicator.style.display = 'none';
+                        return;
+                    }
+
+                    strengthIndicator.style.display = 'block';
+
+                    let strength = 'weak';
+
+                    if (password.length >= 8 && /[A-Z]/.test(password) && /[0-9]/.test(password)) {
+                        strength = 'strong';
+                    } else if (password.length >= 6) {
+                        strength = 'medium';
+                    }
+
+                    strengthIndicator.setAttribute('data-strength', strength);
+                });
+            }
+
+            // Loading state no botão ao submeter
+            form.addEventListener('submit', function() {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '⏳ Criando...';
+            });
+
+            // Remove mensagens de erro ao digitar
+            const inputs = form.querySelectorAll('.form-control');
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    const errorSpan = this.parentElement.querySelector('.text-danger');
+                    if (errorSpan && errorSpan.textContent) {
+                        errorSpan.textContent = '';
+                    }
+                });
+            });
+
+            // Adiciona animação nos inputs ao focar
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'translateX(4px)';
+                });
+
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'translateX(0)';
+                });
+            });
+        });
+    </script>
 }

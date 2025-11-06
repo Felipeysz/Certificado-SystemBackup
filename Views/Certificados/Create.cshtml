@@ -10,13 +10,14 @@
     };
 }
 
-@* Carrega Google Fonts *@
+@* Google Fonts *@
 @foreach (var font in googleFonts)
 {
     <link href="https://fonts.googleapis.com/css2?family=@font.Replace(" ", "+")&display=swap" rel="stylesheet">
 }
 
 <div class="container neo-container mt-5">
+    @* Mensagem de Sucesso *@
     @if (TempData["SuccessMessage"] != null)
     {
         <div class="alert alert-success neoalert-success text-center">
@@ -24,6 +25,7 @@
         </div>
     }
 
+    @* Cabeçalho *@
     <div class="d-flex justify-content-between align-items-center mb-4 animate__animated animate__fadeInDown">
         <h2 class="dashboard-title"><i class="bi bi-award me-2"></i>Criar Certificado</h2>
         <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary btn-logout">
@@ -32,16 +34,19 @@
     </div>
 
     <div class="row g-4">
-        <!-- Formulário -->
+        @* COLUNA DO FORMULÁRIO *@
         <div class="col-12 col-lg-6">
             <div class="card neo-card animate__animated animate__fadeInLeft">
                 <div class="card-body">
-                    <h5 class="card-title mb-4 text-primary"><i class="bi bi-pencil-square me-2"></i>Dados do Certificado</h5>
+                    <h5 class="card-title mb-4 text-primary">
+                        <i class="bi bi-pencil-square me-2"></i>Dados do Certificado
+                    </h5>
 
-                    <form asp-action="Create" asp-controller="Certificados" method="post" enctype="multipart/form-data" id="certificateForm">
+                    <form asp-action="Create" asp-controller="Certificados" method="post"
+                          enctype="multipart/form-data" id="certificateForm">
                         @Html.AntiForgeryToken()
 
-                        <!-- Erros -->
+                        @* Validação de Erros *@
                         @if (!ViewData.ModelState.IsValid)
                         {
                             <div class="alert alert-danger animate__animated animate__shakeX">
@@ -54,103 +59,119 @@
                             </div>
                         }
 
-                        <!-- Upload Certificado Vazio -->
-                        <div class="mb-3">
-                            <label class="form-label">Upload Certificado Vazio <span class="text-danger">*</span></label>
-                            <input type="file" name="certificadoVazioFile" class="form-control" accept="image/*,.pdf" required />
-                            <small class="text-muted">Formatos aceitos: JPG, PNG, PDF</small>
-                        </div>
-
-                        <!-- Campos do Certificado com Estilo Individual -->
-                        <div class="neo-form-section">
-
-                            <!-- Nome do Curso -->
-                            <div class="mb-4 fade-in">
-                                <label asp-for="NomeCurso" class="form-label neo-label">Nome do Curso</label>
-                                <input asp-for="NomeCurso" class="form-control neo-input draggable-input" data-field-id="NomeCurso" />
-                                <div class="d-flex gap-2 mt-2">
-                                    <select class="form-select field-font" data-field-id="NomeCurso">
-                                        @foreach (var font in googleFonts)
-                                        {
-                                            <option value="@font" style="font-family:'@font';">@font</option>
-                                        }
-                                    </select>
-                                    <input type="number" class="form-control field-font-size" data-field-id="NomeCurso" placeholder="Tamanho (px)" />
-                                    <input type="color" class="form-control field-color" data-field-id="NomeCurso" />
-                                </div>
-                                <div class="form-check mt-2">
-                                    <input type="checkbox" class="form-check-input show-on-certificate" id="showNomeCurso" />
-                                    <label class="form-check-label" for="showNomeCurso">Mostrar no Certificado</label>
-                                </div>
-                            </div>
-
-                            <!-- Nome da Instituição -->
-                            <div class="mb-4 fade-in">
-                                <label asp-for="NomeInstituicao" class="form-label neo-label">Nome da Instituição</label>
-                                <input asp-for="NomeInstituicao" class="form-control neo-input draggable-input" data-field-id="NomeInstituicao" />
-                                <div class="d-flex gap-2 mt-2">
-                                    <select class="form-select field-font" data-field-id="NomeInstituicao">
-                                        @foreach (var font in googleFonts)
-                                        {
-                                            <option value="@font" style="font-family:'@font';">@font</option>
-                                        }
-                                    </select>
-                                    <input type="number" class="form-control field-font-size" data-field-id="NomeInstituicao" placeholder="Tamanho (px)" />
-                                    <input type="color" class="form-control field-color" data-field-id="NomeInstituicao" />
-                                </div>
-                                <div class="form-check mt-2">
-                                    <input type="checkbox" class="form-check-input show-on-certificate" id="showNomeInstituicao" />
-                                    <label class="form-check-label" for="showNomeInstituicao">Mostrar no Certificado</label>
-                                </div>
-                            </div>
-
-                            <!-- Data de Emissão -->
-                            <div class="mb-4 fade-in">
-                                <label asp-for="DataEmissao" class="form-label neo-label">Data de Emissão</label>
-                                <input asp-for="DataEmissao" type="date" class="form-control neo-input draggable-input" value="@Model.DataEmissao.ToString("yyyy-MM-dd")" data-field-id="DataEmissao" />
-                                <div class="d-flex gap-2 mt-2">
-                                    <select class="form-select field-font" data-field-id="DataEmissao">
-                                        @foreach (var font in googleFonts)
-                                        {
-                                            <option value="@font" style="font-family:'@font';">@font</option>
-                                        }
-                                    </select>
-                                    <input type="number" class="form-control field-font-size" data-field-id="DataEmissao" placeholder="Tamanho (px)" />
-                                    <input type="color" class="form-control field-color" data-field-id="DataEmissao" />
-                                </div>
-                                <div class="form-check mt-2">
-                                    <input type="checkbox" class="form-check-input show-on-certificate" id="showDataEmissao" />
-                                    <label class="form-check-label" for="showDataEmissao">Mostrar no Certificado</label>
-                                </div>
-                            </div>
-
-
-                            <div class="d-flex gap-2 mb-4">
-                                <button type="button" class="btn btn-primary neo-btn flex-fill" id="renderCertificateBtn">
-                                    <i class="bi bi-eye me-2"></i>Visualizar no Certificado
-                                </button>
-
-                                <button class="btn btn-outline-primary neo-btn-outline flex-fill" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#optionalFields"
-                                        aria-expanded="false" aria-controls="optionalFields">
-                                    <i class="bi bi-list-check me-2"></i>Detalhes do Certificado
-                                </button>
-                            </div>
-                                @await Html.PartialAsync("_CertificateFieldsPartial")
-
+                        @* Upload Template PDF *@
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">
+                                <i class="bi bi-file-earmark-pdf me-2"></i>Template do Certificado
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="file" name="certificadoVazioFile" class="form-control"
+                                   accept=".pdf,.png,.jpg,.jpeg" required />
+                            <small class="text-muted">
+                                <i class="bi bi-info-circle me-1"></i>PDF ou imagem (PNG/JPG) do certificado em branco
+                            </small>
                         </div>
 
                         <hr class="my-4" />
 
-                        <div class="form-check mb-4">
-                            <input class="form-check-input" type="checkbox" id="toggleDraggables" checked>
-                            <label class="form-check-label" for="toggleDraggables">Mostrar campos no certificado</label>
+                        @* Configuração do Nome do Aluno *@
+                        <div class="mb-4 bg-light p-3 rounded">
+                            <h6 class="fw-bold mb-3">
+                                <i class="bi bi-person-badge me-2"></i>Nome do Aluno
+                            </h6>
+
+                            <div class="mb-3">
+                                <label class="form-label">Preview do Nome</label>
+                                <input type="text" id="nomeAlunoPreview" class="form-control"
+                                       placeholder="Digite para testar" value="João da Silva" />
+                                <small class="text-muted">Apenas para visualização</small>
+                            </div>
+
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <label class="form-label">Fonte</label>
+                                    <select class="form-select form-select-sm" id="draggableFont">
+                                        @foreach (var font in googleFonts)
+                                        {
+                                            <option value="@font" style="font-family:'@font';">@font</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label class="form-label">Tamanho</label>
+                                    <input type="number" id="draggableFontSize" class="form-control form-control-sm"
+                                           value="24" min="8" max="100" />
+                                </div>
+                                <div class="col-3">
+                                    <label class="form-label">Cor</label>
+                                    <input type="color" id="draggableFontColor" class="form-control form-control-sm"
+                                           value="#000000" />
+                                </div>
+                            </div>
+
+                            <div class="row g-2 mt-2">
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="draggableFontWeight" />
+                                        <label class="form-check-label" for="draggableFontWeight">
+                                            <strong>Negrito</strong>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <select id="draggableTextAlign" class="form-select form-select-sm">
+                                        <option value="left">← Esquerda</option>
+                                        <option value="center" selected>↔ Centro</option>
+                                        <option value="right">→ Direita</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-info mt-3 mb-0">
+                                <i class="bi bi-lightbulb me-2"></i>
+                                <small>Arraste o nome na pré-visualização para posicionar</small>
+                            </div>
+
+                            <button type="button" class="btn btn-outline-success w-100 mt-3" id="saveConfigBtn">
+                                <i class="bi bi-check-circle me-2"></i>Salvar Posição do Nome
+                            </button>
                         </div>
 
-                        <input type="hidden" name="CertificadoGeradoBase64" id="CertificadoGeradoBase64" />
+                        <hr class="my-4" />
 
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary neo-btn">
+                        @* Campos Obrigatórios *@
+                        @await Html.PartialAsync("_RequiredFieldsPartial", Model)
+
+                        <hr class="my-4" />
+
+                        @* Campos Opcionais *@
+                        <button class="btn btn-outline-primary w-100 mb-3" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#optionalFields">
+                            <i class="bi bi-list-check me-2"></i>Campos Opcionais
+                        </button>
+
+                        @await Html.PartialAsync("_CertificateFieldsPartial")
+
+                        <hr class="my-4" />
+
+                        @* Toggle Campos Arrastáveis *@
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="toggleDraggables" checked>
+                            <label class="form-check-label" for="toggleDraggables">
+                                <i class="bi bi-eye me-1"></i>Mostrar campos arrastáveis
+                            </label>
+                        </div>
+
+                        @* Hidden Fields *@
+                        <input type="hidden" name="CertificadoGeradoBase64" id="CertificadoGeradoBase64" />
+                        <input type="hidden" name="NomeAlunoConfig" id="NomeAlunoConfig" />
+
+                        @* Botões de Ação *@
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-primary" id="renderCertificateBtn">
+                                <i class="bi bi-eye me-2"></i>Visualizar Preview
+                            </button>
+                            <button type="submit" class="btn btn-success btn-lg">
                                 <i class="bi bi-floppy me-2"></i>Salvar Certificado
                             </button>
                         </div>
@@ -159,18 +180,45 @@
             </div>
         </div>
 
-        <!-- Pré-visualização -->
+        @* COLUNA DE PRÉ-VISUALIZAÇÃO *@
         <div class="col-12 col-lg-6">
-            <div class="card neo-card animate__animated animate__fadeInRight">
+            <div class="card neo-card animate__animated animate__fadeInRight sticky-preview">
                 <div class="card-body">
-                    <h5 class="card-title mb-4 text-primary"><i class="bi bi-eye me-2"></i>Pré-visualização</h5>
-                    <div id="certificatePreview" class="certificate-preview-area">
-                        <div class="preview-placeholder text-center">
-                            <i class="bi bi-file-earmark-image fs-1 text-muted mb-2 d-block"></i>
-                            <span id="previewPlaceholder" class="text-muted d-block">Nenhum certificado carregado</span>
-                            <small class="text-muted">Faça upload de uma imagem para visualizar</small>
+                    <h5 class="card-title mb-4 text-primary">
+                        <i class="bi bi-eye me-2"></i>Pré-visualização
+                    </h5>
+
+                    <div id="certificatePreview" class="certificate-preview-area position-relative">
+                        @* Placeholder *@
+                        <div class="preview-placeholder text-center" id="previewPlaceholder">
+                            <i class="bi bi-file-earmark-pdf fs-1 text-muted mb-3 d-block"></i>
+                            <h5 class="text-muted">Nenhum certificado carregado</h5>
+                            <p class="text-muted mb-0">Faça upload do template para visualizar</p>
                         </div>
-                        <img id="certificadoVazioImg" src="" class="img-fluid rounded shadow-sm" style="display:none;" />
+
+                        @* Canvas para PDF *@
+                        <canvas id="pdfPreviewCanvas" class="pdf-preview-canvas" style="display:none;"></canvas>
+
+                        @* Imagem (fallback) *@
+                        <img id="certificadoVazioImg" src="" class="img-fluid rounded shadow-sm"
+                             style="display:none;" alt="Certificado" />
+
+                        @* Nome do Aluno Draggable *@
+                        <div id="draggableNomeAluno" class="draggable-field" style="display:none;">
+                            <span id="nomeAlunoText" class="draggable-text">João da Silva</span>
+                            <div class="drag-handle">
+                                <i class="bi bi-arrows-move"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* Indicadores de Posição *@
+                    <div class="mt-3 p-2 bg-light rounded" id="positionInfo" style="display:none;">
+                        <small class="text-muted">
+                            <strong>Posição:</strong>
+                            X: <span id="posX">0</span>px,
+                            Y: <span id="posY">0</span>px
+                        </small>
                     </div>
                 </div>
             </div>
@@ -181,13 +229,21 @@
 @section Styles {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
-    <link href="~/css/CreateCertification.css" rel="stylesheet" />
+    <link href="~/css/Certificados/Create.css" rel="stylesheet" />
+    <link href="~/css/ThemaVarieble.css" rel="stylesheet" />
 }
 
 @section Scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-    <script src="~/js/certificate-form.js"></script>
+    <!-- ⭐ ADICIONE ESTA LINHA ⭐ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <script src="~/js/configNomeAlunoCertificado.js"></script>
+    <script src="~/js/certificate-form.js"></script>
 }

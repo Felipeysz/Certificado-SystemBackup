@@ -44,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2VydGlmaWNhZG9zXF9DZXJ0aWZpY2F0ZUZpZWxkc1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Felip/Desktop/Certificado/Views/Certificados/_RequiredFieldsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2VydGlmaWNhZG9zXF9SZXF1aXJlZEZpZWxkc1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Felip/Desktop/Certificado/Views/ErrorPage/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JQYWdlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -58,6 +62,34 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Felip/Desktop/Certificado/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Felip/Desktop/Certificado/Views/Trilhas/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJpbGhhc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Felip/Desktop/Certificado/Views/Trilhas/Detalhes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJpbGhhc1xEZXRhbGhlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Felip/Desktop/Certificado/Views/Trilhas/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJpbGhhc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Felip/Desktop/Certificado/Views/Trilhas/Erro.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJpbGhhc1xFcnJvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Felip/Desktop/Certificado/Views/Trilhas/Gerar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJpbGhhc1xHZXJhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Felip/Desktop/Certificado/Views/Trilhas/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJpbGhhc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Felip/Desktop/Certificado/Views/Trilhas/Publicas.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJpbGhhc1xQdWJsaWNhcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Felip/Desktop/Certificado/Views/Users/Create.cshtml]

@@ -1,5 +1,6 @@
 ﻿using AuthDemo.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -12,6 +13,7 @@ namespace AuthDemo.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Certificate> Certificates { get; set; }
+        public DbSet<Trilha> Trilhas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

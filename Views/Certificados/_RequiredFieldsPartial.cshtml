@@ -1,0 +1,120 @@
+﻿@model AuthDemo.DTOs.CertificateDto
+@{
+    var googleFonts = new List<string> {
+        "Roboto","Open Sans","Lato","Montserrat","Oswald","Raleway","Merriweather","PT Sans",
+        "Ubuntu","Noto Sans","Poppins","Source Sans Pro","Nunito","Playfair Display","Roboto Condensed",
+        "Inconsolata","Fira Sans","Work Sans","Rubik","Exo 2","Dosis","Quicksand","Bebas Neue",
+        "Arimo","Karla","Hind","Varela Round","Josefin Sans","Anton","Cairo","Righteous",
+        "IBM Plex Sans","Baloo 2","Catamaran","Teko","Comfortaa","Spectral","Alegreya","Indie Flower"
+    };
+}
+
+<h6 class="fw-bold mb-3"><i class="bi bi-card-checklist me-2"></i>Campos Obrigatórios</h6>
+
+@* Nome do Curso *@
+<div class="mb-3 fade-in">
+    <label asp-for="NomeCurso" class="form-label">
+        <i class="bi bi-book me-1"></i>Nome do Curso <span class="text-danger">*</span>
+    </label>
+    <input asp-for="NomeCurso" class="form-control draggable-input"
+           data-field-id="NomeCurso" placeholder="Ex: Desenvolvimento Web" required />
+
+    <div class="row g-2 mt-2">
+        <div class="col-5">
+            <select class="form-select form-select-sm field-font" data-field-id="NomeCurso">
+                @foreach (var font in googleFonts)
+                {
+                    <option value="@font" style="font-family:'@font';">@font</option>
+                }
+            </select>
+        </div>
+        <div class="col-3">
+            <input type="number" class="form-control form-control-sm field-font-size"
+                   data-field-id="NomeCurso" placeholder="Tam." value="16" min="8" max="72" />
+        </div>
+        <div class="col-2">
+            <input type="color" class="form-control form-control-sm field-color"
+                   data-field-id="NomeCurso" value="#000000" />
+        </div>
+        <div class="col-2">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input show-on-certificate" id="showNomeCurso" />
+                <label class="form-check-label" for="showNomeCurso" title="Mostrar no certificado">
+                    <i class="bi bi-eye"></i>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Nome da Instituição *@
+<div class="mb-3 fade-in">
+    <label asp-for="NomeInstituicao" class="form-label">
+        <i class="bi bi-building me-1"></i>Instituição
+    </label>
+    <input asp-for="NomeInstituicao" class="form-control draggable-input"
+           data-field-id="NomeInstituicao" placeholder="Ex: Instituto de Tecnologia" />
+
+    <div class="row g-2 mt-2">
+        <div class="col-5">
+            <select class="form-select form-select-sm field-font" data-field-id="NomeInstituicao">
+                @foreach (var font in googleFonts)
+                {
+                    <option value="@font" style="font-family:'@font';">@font</option>
+                }
+            </select>
+        </div>
+        <div class="col-3">
+            <input type="number" class="form-control form-control-sm field-font-size"
+                   data-field-id="NomeInstituicao" placeholder="Tam." value="14" min="8" max="72" />
+        </div>
+        <div class="col-2">
+            <input type="color" class="form-control form-control-sm field-color"
+                   data-field-id="NomeInstituicao" value="#000000" />
+        </div>
+        <div class="col-2">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input show-on-certificate" id="showNomeInstituicao" />
+                <label class="form-check-label" for="showNomeInstituicao" title="Mostrar no certificado">
+                    <i class="bi bi-eye"></i>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Data de Emissão *@
+<div class="mb-3 fade-in">
+    <label asp-for="DataEmissao" class="form-label">
+        <i class="bi bi-calendar-event me-1"></i>Data de Emissão
+    </label>
+    <input asp-for="DataEmissao" type="date" class="form-control draggable-input"
+           value="@Model.DataEmissao.ToString("yyyy-MM-dd")" data-field-id="DataEmissao" />
+
+    <div class="row g-2 mt-2">
+        <div class="col-5">
+            <select class="form-select form-select-sm field-font" data-field-id="DataEmissao">
+                @foreach (var font in googleFonts)
+                {
+                    <option value="@font" style="font-family:'@font';">@font</option>
+                }
+            </select>
+        </div>
+        <div class="col-3">
+            <input type="number" class="form-control form-control-sm field-font-size"
+                   data-field-id="DataEmissao" placeholder="Tam." value="12" min="8" max="72" />
+        </div>
+        <div class="col-2">
+            <input type="color" class="form-control form-control-sm field-color"
+                   data-field-id="DataEmissao" value="#000000" />
+        </div>
+        <div class="col-2">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input show-on-certificate" id="showDataEmissao" />
+                <label class="form-check-label" for="showDataEmissao" title="Mostrar no certificado">
+                    <i class="bi bi-eye"></i>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

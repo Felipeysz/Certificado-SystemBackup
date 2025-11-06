@@ -1,0 +1,397 @@
+﻿/* ===== Trilhas Create - NeoAuth Unified Theme ===== */
+/* Requer: theme-variables.css */
+
+body {
+    font-family: var(--font-primary);
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: var(--text-primary);
+    position: relative;
+    overflow-x: hidden;
+}
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+/* Container */
+.container {
+    position: relative;
+    z-index: var(--z-base);
+    animation: fadeIn var(--transition-base);
+}
+
+/* Card */
+.card.shadow {
+    background: var(--bg-primary);
+    border-radius: var(--radius-2xl);
+    border: none;
+    box-shadow: var(--shadow-xl);
+    animation: slideUp var(--transition-base);
+    backdrop-filter: blur(10px);
+}
+
+/* Header */
+.card-header.bg-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+    border: none;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+    .card-header.bg-primary::before {
+        content: "";
+        position: absolute;
+        inset: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+        animation: pulse 3s infinite;
+    }
+
+.card-header h3 {
+    color: var(--white);
+    font-weight: var(--font-bold);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+    .card-header h3 i {
+        animation: bounce 2s infinite;
+    }
+
+/* Card Body */
+.card-body {
+    padding: 2.5rem;
+    position: relative;
+}
+
+/* Alerts */
+.alert {
+    border-radius: var(--radius-lg);
+    border: none;
+    padding: 1.25rem 1.5rem;
+    animation: fadeIn var(--transition-fast);
+}
+
+.alert-info {
+    background: linear-gradient(135deg, var(--info-light), var(--info));
+    color: var(--info-dark);
+    border-left: 4px solid var(--info);
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, var(--danger-light), var(--danger));
+    color: var(--danger-dark);
+    border-left: 4px solid var(--danger);
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, var(--warning-light), var(--warning));
+    color: var(--warning-dark);
+    border-left: 4px solid var(--warning);
+}
+
+.alert i {
+    margin-right: 0.5rem;
+}
+
+/* Labels */
+.form-label {
+    color: var(--text-primary);
+    font-weight: var(--font-semibold);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+    .form-label i {
+        color: var(--primary);
+    }
+
+/* Inputs */
+.form-control {
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 0.875rem 1.25rem;
+    transition: all var(--transition-fast);
+    font-size: 1rem;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+    .form-control:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(79,70,229,0.1);
+        outline: none;
+    }
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Switch */
+.form-check-input {
+    width: 3rem;
+    height: 1.5rem;
+    cursor: pointer;
+    border: 2px solid var(--border-color);
+    transition: all var(--transition-fast);
+}
+
+    .form-check-input:checked {
+        background-color: var(--success);
+        border-color: var(--success);
+    }
+
+    .form-check-input:focus {
+        box-shadow: 0 0 0 4px rgba(16,185,129,0.2);
+        outline: none;
+    }
+
+.form-check-label {
+    color: var(--text-primary);
+    font-weight: var(--font-medium);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+/* Certificate Cards */
+.certificate-card {
+    border: 2px solid var(--border-color) !important;
+    border-radius: var(--radius-xl) !important;
+    background: var(--bg-primary);
+    position: relative;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    overflow: hidden;
+}
+
+    .certificate-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(79,70,229,0.08), rgba(99,102,241,0.08));
+        opacity: 0;
+        transition: opacity var(--transition-fast);
+        pointer-events: none;
+    }
+
+    .certificate-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-xl);
+        border-color: var(--primary) !important;
+    }
+
+        .certificate-card:hover::before {
+            opacity: 1;
+        }
+
+    .certificate-card .card-body {
+        padding: 1.25rem;
+    }
+
+    .certificate-card h6 {
+        font-weight: var(--font-semibold);
+        margin-bottom: 0.5rem;
+    }
+
+    .certificate-card small {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+    }
+
+/* Badges */
+.badge {
+    border-radius: var(--radius-lg);
+    font-weight: var(--font-semibold);
+    transition: all var(--transition-fast);
+}
+
+    .badge.bg-info {
+        background: linear-gradient(135deg, var(--info), var(--info-dark)) !important;
+    }
+
+    .badge.bg-secondary {
+        background: linear-gradient(135deg, var(--gray-600), var(--gray-700)) !important;
+    }
+
+/* Botões */
+.btn {
+    border-radius: var(--radius-lg);
+    font-weight: var(--font-bold);
+    transition: all var(--transition-fast);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+    .btn::before {
+        content: "";
+        position: absolute;
+        inset: 50% auto auto 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.3);
+        transform: translate(-50%,-50%);
+        transition: width 0.6s, height 0.6s;
+    }
+
+    .btn:hover::before {
+        width: 400px;
+        height: 400px;
+    }
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--white);
+    box-shadow: 0 4px 14px rgba(79,70,229,0.4);
+    padding: 1rem 2rem;
+}
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-xl);
+    }
+
+.btn-outline-primary {
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    background: transparent;
+}
+
+    .btn-outline-primary:hover {
+        background: var(--primary);
+        color: var(--white);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+.btn-outline-secondary {
+    color: var(--gray-600);
+    border: 2px solid var(--gray-600);
+    background: transparent;
+}
+
+    .btn-outline-secondary:hover {
+        background: var(--gray-600);
+        color: var(--white);
+        transform: translateY(-2px);
+    }
+
+/* Divider */
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+    margin: 2rem 0;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes pulse {
+    0%,100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .card-header h3 {
+        font-size: 1.25rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .btn-primary {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    .card.shadow {
+        background: var(--gray-800);
+    }
+
+    .certificate-card {
+        background: var(--gray-800);
+        border-color: var(--gray-700) !important;
+    }
+
+    .form-control {
+        background: var(--gray-900);
+        color: var(--white);
+        border-color: var(--gray-700);
+    }
+
+    .alert-info {
+        background: linear-gradient(135deg, var(--gray-700), var(--gray-800));
+        border-left-color: var(--info);
+    }
+}

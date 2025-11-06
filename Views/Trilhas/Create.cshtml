@@ -1,0 +1,197 @@
+﻿<!-- ============================================ -->
+<!-- 📁 Views/Trilhas/Create.cshtml (ADMIN) -->
+<!-- ============================================ -->
+@model AuthDemo.DTOs.TrilhaDto
+
+@{
+    ViewData["Title"] = "Nova Trilha";
+    var certificados = ViewBag.Certificados as List<AuthDemo.Models.Certificate>;
+}
+
+@section Styles {
+    <link href="~/css/Trilhas/CreateTrilha.css" rel="stylesheet" />
+    <link href="~/css/ThemaVarieble.css" rel="stylesheet" />
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-plus-circle"></i> Criar Nova Trilha
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-info">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>Trilhas</strong> são conjuntos de certificados que os alunos podem obter juntos.
+                        Selecione os certificados que farão parte desta trilha.
+                    </div>
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                {
+                                    <li>@error.ErrorMessage</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+
+                    <form method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-4">
+                            <label for="Nome" class="form-label fw-bold">
+                                <i class="fas fa-tag"></i> Nome da Trilha *
+                            </label>
+                            <input type="text"
+                                   asp-for="Nome"
+                                   class="form-control form-control-lg"
+                                   placeholder="Ex: Curso Completo de Programação Web"
+                                   required />
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="Descricao" class="form-label fw-bold">
+                                <i class="fas fa-align-left"></i> Descrição (Opcional)
+                            </label>
+                            <textarea asp-for="Descricao"
+                                      class="form-control"
+                                      rows="3"
+                                      placeholder="Descreva esta trilha..."></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check form-switch">
+                                <input type="checkbox"
+                                       asp-for="Ativa"
+                                       class="form-check-input"
+                                       id="Ativa"
+                                       checked />
+                                <label class="form-check-label" for="Ativa">
+                                    <i class="fas fa-toggle-on"></i> Trilha ativa (visível para alunos)
+                                </label>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <label class="form-label fw-bold mb-0">
+                                    <i class="fas fa-certificate"></i> Certificados da Trilha *
+                                </label>
+                                <div>
+                                    <button type="button" class="btn btn-sm btn-outline-primary" id="btnSelecionarTodos">
+                                        <i class="fas fa-check-double"></i> Todos
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" id="btnLimpar">
+                                        <i class="fas fa-times"></i> Limpar
+                                    </button>
+                                </div>
+                            </div>
+
+                            @if (certificados != null && certificados.Any())
+                            {
+                                <div class="row g-3">
+                                    @foreach (var cert in certificados)
+                                    {
+                                        <div class="col-md-6">
+                                            <div class="card border-primary shadow-sm certificate-card">
+                                                <div class="card-body">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input certificate-checkbox"
+                                                               type="checkbox"
+                                                               name="certificadosSelecionados"
+                                                               value="@cert.Id"
+                                                               id="cert_@cert.Id">
+                                                        <label class="form-check-label w-100" for="cert_@cert.Id">
+                                                            <h6 class="mb-1 text-primary fw-bold">@cert.NomeCurso</h6>
+                                                            <small class="text-muted d-block">
+                                                                <i class="fas fa-clock"></i> @cert.CargaHoraria horas
+                                                            </small>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="mt-3 text-center">
+                                    <span class="badge bg-info fs-6 py-2 px-3" id="contadorSelecionados">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span id="numeroSelecionados">0</span> certificado(s) selecionado(s)
+                                    </span>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    Nenhum certificado disponível.
+                                    <a href="@Url.Action("Create", "Certificados")" class="alert-link">
+                                        Criar certificados primeiro
+                                    </a>
+                                </div>
+                            }
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-save"></i> Criar Trilha
+                            </button>
+                            <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left"></i> Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function atualizarContador() {
+            const checkboxes = document.querySelectorAll('.certificate-checkbox:checked');
+            document.getElementById('numeroSelecionados').textContent = checkboxes.length;
+
+            const badge = document.getElementById('contadorSelecionados');
+            badge.className = 'badge fs-6 py-2 px-3 ' +
+                (checkboxes.length === 0 ? 'bg-secondary' : 'bg-info');
+        }
+
+        document.getElementById('btnSelecionarTodos')?.addEventListener('click', function() {
+            document.querySelectorAll('.certificate-checkbox').forEach(cb => cb.checked = true);
+            atualizarContador();
+        });
+
+        document.getElementById('btnLimpar')?.addEventListener('click', function() {
+            document.querySelectorAll('.certificate-checkbox').forEach(cb => cb.checked = false);
+            atualizarContador();
+        });
+
+        document.querySelectorAll('.certificate-checkbox').forEach(cb => {
+            cb.addEventListener('change', atualizarContador);
+        });
+
+        document.querySelectorAll('.certificate-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (e.target.type === 'checkbox' || e.target.tagName === 'LABEL') return;
+                const checkbox = card.querySelector('.certificate-checkbox');
+                checkbox.checked = !checkbox.checked;
+                atualizarContador();
+            });
+        });
+
+        atualizarContador();
+    </script>
+}

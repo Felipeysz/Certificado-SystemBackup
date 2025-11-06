@@ -1,0 +1,188 @@
+﻿@using Org.BouncyCastle.Asn1.Ocsp
+@model AuthDemo.Services.TrilhaDetalhesDto
+
+@{
+    ViewData["Title"] = "Detalhes da Trilha";
+    var isAdmin = User.IsInRole("Admin");
+}
+
+@section Styles {
+    <link href="~/css/Trilhas/DetalhesTrilha.css" rel="stylesheet" />
+    <link href="~/css/ThemaVarieble.css" rel="stylesheet" />
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-lg">
+                <div class="card-header @(Model.Ativa ? "bg-success" : "bg-secondary") text-white py-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2 class="mb-1">
+                                <i class="fas fa-route"></i> @Model.Nome
+                            </h2>
+                            <small>
+                                <i class="fas fa-calendar"></i>
+                                Criado em @Model.DataCriacao.ToString("dd/MM/yyyy HH:mm")
+                            </small>
+                        </div>
+                        <div>
+                            <span class="badge @(Model.Ativa ? "bg-light text-success" : "bg-dark") fs-5 px-3 py-2">
+                                @(Model.Ativa ? "✅ Ativa" : "❌ Inativa")
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body p-4">
+                    <!-- Descrição -->
+                    @if (!string.IsNullOrEmpty(Model.Descricao))
+                    {
+                        <div class="alert alert-info mb-4">
+                            <h5 class="alert-heading">
+                                <i class="fas fa-info-circle"></i> Descrição
+                            </h5>
+                            <p class="mb-0">@Model.Descricao</p>
+                        </div>
+                    }
+
+                    <!-- Estatísticas -->
+                    <div class="row mb-4">
+                        <div class="col-md-4 text-center">
+                            <div class="stat-box bg-primary text-white p-3 rounded">
+                                <i class="fas fa-certificate fa-2x mb-2"></i>
+                                <h3 class="mb-0">@Model.Certificados.Count</h3>
+                                <small>Certificados</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="stat-box bg-info text-white p-3 rounded">
+                                <i class="fas fa-clock fa-2x mb-2"></i>
+                                <h3 class="mb-0">@Model.Certificados.Sum(c => c.CargaHoraria)</h3>
+                                <small>Horas Totais</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="stat-box @(Model.Ativa ? "bg-success" : "bg-secondary") text-white p-3 rounded">
+                                <i class="fas @(Model.Ativa ? "fa-check-circle" : "fa-times-circle") fa-2x mb-2"></i>
+                                <h3 class="mb-0">@(Model.Ativa ? "SIM" : "NÃO")</h3>
+                                <small>Disponível</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Certificados -->
+                    <h4 class="mb-3">
+                        <i class="fas fa-list"></i> Certificados Inclusos
+                    </h4>
+                    <div class="list-group mb-4">
+                        @foreach (var cert in Model.Certificados)
+                        {
+                            <div class="list-group-item">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-badge bg-success text-white me-3">
+                                        <i class="fas fa-certificate"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h5 class="mb-1">@cert.NomeCurso</h5>
+                                        <small class="text-muted">
+                                            <i class="fas fa-clock"></i> @cert.CargaHoraria horas
+                                            @if (!string.IsNullOrEmpty(cert.NomeInstituicao))
+                                            {
+                                                <span class="ms-2">
+                                                    | <i class="fas fa-building"></i> @cert.NomeInstituicao
+                                                </span>
+                                            }
+                                        </small>
+                                    </div>
+                                    <div>
+                                        <span class="badge bg-primary">ID: @cert.Id</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Ações -->
+                    <div class="d-grid gap-2">
+                        <a href="@Url.Action("Edit", new { id = Model.Id })"
+                           class="btn btn-warning btn-lg">
+                            <i class="fas fa-edit"></i> Editar Trilha
+                        </a>
+                        <div class="row g-2">
+                            <div class="@(isAdmin ? "col-6" : "col-12")">
+                                <a href="@Url.Action("Index")" class="btn btn-outline-secondary w-100">
+                                    <i class="fas fa-arrow-left"></i> Voltar
+                                </a>
+                            </div>
+                            @if (isAdmin)
+                            {
+                                <div class="col-6">
+                                    <form method="post"
+                                          action="@Url.Action("Delete", new { id = Model.Id })"
+                                          onsubmit="return confirm('Tem certeza que deseja excluir esta trilha?');">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-danger w-100">
+                                            <i class="fas fa-trash"></i> Excluir
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card de Informações Adicionais -->
+            <div class="card mt-4 shadow">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-info-circle"></i> Informações
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-2">
+                        <strong>Status:</strong>
+                        @if (Model.Ativa)
+                        {
+                            <span class="text-success">
+                                <i class="fas fa-check-circle"></i>
+                                Esta trilha está <strong>ativa</strong> e pode ser acessada por link público
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="text-secondary">
+                                <i class="fas fa-times-circle"></i>
+                                Esta trilha está <strong>inativa</strong> e não pode ser acessada
+                            </span>
+                        }
+                    </p>
+                    <p class="mb-0">
+                        <strong>Link Público:</strong>
+                        <code>@Url.Action("Gerar", "Trilhas", new { id = Model.Id }, Context.Request.Scheme)</code>
+                        <button class="btn btn-sm btn-outline-primary ms-2" onclick="copiarLink()">
+                            <i class="fas fa-copy"></i> Copiar
+                        </button>
+                    </p>
+                    <small class="text-muted">
+                        <i class="fas fa-unlock"></i> Este link é público - qualquer pessoa pode usá-lo para gerar certificados
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function copiarLink() {
+            const link = '@Url.Action("Gerar", "Trilhas", new { id = Model.Id }, Context.Request.Scheme)';
+            navigator.clipboard.writeText(link).then(() => {
+                alert('✅ Link copiado para a área de transferência!');
+            }).catch(() => {
+                alert('❌ Erro ao copiar link');
+            });
+        }
+    </script>
+}

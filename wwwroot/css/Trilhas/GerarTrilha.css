@@ -1,0 +1,302 @@
+﻿/* ===== Gerar Trilha - Unified Professional Style ===== */
+/* Importa: <link rel="stylesheet" href="theme-variables.css"> */
+
+/* ===== Base ===== */
+body {
+    font-family: var(--font-primary);
+    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: var(--text-primary);
+    position: relative;
+    overflow-x: hidden;
+}
+
+    /* Background Pattern */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+/* ===== Container ===== */
+.container {
+    margin: 2rem auto;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 0.6s ease;
+}
+
+/* ===== Card Principal ===== */
+.card.shadow-lg {
+    background: var(--bg-card);
+    border-radius: var(--radius-2xl);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-xl);
+    animation: slideUp 0.8s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Header com Gradiente */
+.bg-gradient-success {
+    background: linear-gradient(135deg, var(--success-dark) 0%, var(--success) 100%) !important;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+    .bg-gradient-success::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+        animation: pulse 3s infinite;
+    }
+
+.card-header h2 {
+    color: var(--white);
+    font-weight: var(--font-extrabold);
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.card-header p {
+    position: relative;
+    z-index: 1;
+    opacity: 0.95;
+}
+
+/* ===== Card Body ===== */
+.card-body {
+    padding: 2.5rem;
+    position: relative;
+}
+
+/* ===== Alerts ===== */
+.alert {
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    border: 2px solid transparent;
+    animation: fadeIn 0.5s ease;
+    font-weight: var(--font-medium);
+}
+
+.alert-info {
+    background: linear-gradient(135deg, var(--info-light), var(--gray-100));
+    border-color: var(--info);
+    color: var(--info-dark);
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, var(--danger-light), var(--gray-100));
+    border-color: var(--danger);
+    color: var(--danger-dark);
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, var(--warning-light), var(--gray-100));
+    border-color: var(--warning);
+    color: var(--warning-dark);
+}
+
+/* ===== Section Title ===== */
+.card-body h5 {
+    color: var(--text-primary);
+    font-weight: var(--font-bold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+    .card-body h5 i {
+        color: var(--success);
+    }
+
+/* ===== Lista ===== */
+.list-group {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.list-group-item {
+    border: 1px solid var(--border-light);
+    padding: 1.5rem;
+    transition: all var(--transition-base);
+    background: var(--bg-card);
+    position: relative;
+}
+
+    .list-group-item:hover {
+        background: linear-gradient(135deg, var(--success-light), var(--gray-50));
+        transform: translateX(8px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--success);
+    }
+
+/* Ícone circular */
+.icon-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--success-dark), var(--success));
+    box-shadow: 0 4px 10px rgba(16,185,129,0.3);
+    transition: all var(--transition-base);
+}
+
+.list-group-item:hover .icon-circle {
+    transform: scale(1.1) rotate(10deg);
+}
+
+/* ===== Texto da lista ===== */
+.list-group-item h6 {
+    color: var(--text-primary);
+    font-weight: var(--font-semibold);
+    margin-bottom: 0.5rem;
+}
+
+.list-group-item small {
+    color: var(--text-muted);
+}
+
+/* ===== Botões ===== */
+.btn {
+    border-radius: var(--radius-xl);
+    font-weight: var(--font-bold);
+    padding: 1rem 2rem;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--success), var(--success-dark));
+    border: none;
+    color: var(--white);
+    box-shadow: 0 4px 14px rgba(16,185,129,0.4);
+}
+
+    .btn-success:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(16,185,129,0.5);
+    }
+
+.btn-outline-secondary {
+    border: 2px solid var(--border-medium);
+    color: var(--text-muted);
+    background: transparent;
+}
+
+    .btn-outline-secondary:hover {
+        background: var(--bg-secondary);
+        border-color: var(--text-secondary);
+        color: var(--text-primary);
+        transform: translateY(-2px);
+    }
+
+/* ===== Formulário ===== */
+.form-label {
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: var(--font-semibold);
+}
+
+.form-control-lg {
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--border-light);
+    padding: 1rem 1.25rem;
+    font-size: 1.125rem;
+    background: var(--bg-card);
+    transition: all var(--transition-base);
+}
+
+    .form-control-lg:focus {
+        border-color: var(--success);
+        box-shadow: var(--focus-ring);
+        outline: none;
+    }
+
+/* ===== Loading Spinner ===== */
+#loadingSpinner {
+    animation: fadeIn 0.5s ease;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--success-light), var(--gray-50));
+    border-radius: var(--radius-xl);
+    border: 2px solid var(--success);
+}
+
+/* ===== Animações ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.9;
+        transform: scale(1.05);
+    }
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 768px) {
+    .container {
+        margin: 1rem auto;
+        padding: 0 1rem;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.875rem 1.5rem;
+    }
+
+    .form-control-lg {
+        font-size: 1rem;
+        padding: 0.875rem 1rem;
+    }
+}

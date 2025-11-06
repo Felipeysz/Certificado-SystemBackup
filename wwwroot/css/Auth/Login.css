@@ -1,0 +1,224 @@
+﻿/* ===== NeoAuth Login Page - Professional UI ===== */
+/* Importa: <link rel="stylesheet" href="theme-variables.css"> */
+
+/* ===== Layout ===== */
+body {
+    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-primary);
+    color: var(--text-primary);
+}
+
+/* Container Principal */
+.neoauth-card {
+    background: var(--white);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--border-light);
+    max-width: 420px;
+    width: 100%;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+    .neoauth-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-2xl);
+    }
+
+    /* Faixa animada no topo */
+    .neoauth-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 100%;
+        background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary-light));
+        background-size: 200% 100%;
+        animation: gradientFlow 6s linear infinite;
+    }
+
+@keyframes gradientFlow {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* ===== Header ===== */
+.neoauth-card h3 {
+    text-align: center;
+    font-weight: var(--font-extrabold);
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    letter-spacing: var(--tracking-tight);
+}
+
+    .neoauth-card h3 i {
+        color: var(--primary);
+        margin-right: 0.5rem;
+    }
+
+/* ===== Form ===== */
+.neoauth-form {
+    padding: 2rem;
+}
+
+.form-label {
+    color: var(--text-secondary);
+    font-weight: var(--font-semibold);
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+}
+
+/* ===== Input Fields ===== */
+.form-control {
+    background-color: var(--white);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 0.9rem 1rem;
+    color: var(--text-primary);
+    transition: all var(--transition-base);
+    font-weight: var(--font-medium);
+}
+
+    .form-control:focus {
+        border-color: var(--primary);
+        box-shadow: var(--focus-ring);
+        background-color: var(--white);
+        transform: translateY(-1px);
+    }
+
+    .form-control::placeholder {
+        color: var(--text-muted);
+    }
+
+/* ===== Input Icons ===== */
+.input-group .btn {
+    border: none;
+    background: transparent;
+    color: var(--text-tertiary);
+    transition: all var(--transition-base);
+}
+
+    .input-group .btn:hover {
+        color: var(--primary);
+        background-color: var(--gray-50);
+    }
+
+/* ===== Checkbox ===== */
+.form-check-input {
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 2px solid var(--border-medium);
+    transition: all var(--transition-fast);
+}
+
+    .form-check-input:checked {
+        background-color: var(--primary);
+        border-color: var(--primary);
+        animation: checkPulse 0.3s ease-in-out;
+    }
+
+@keyframes checkPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+.form-check-label {
+    color: var(--text-secondary);
+    font-weight: var(--font-medium);
+    cursor: pointer;
+}
+
+/* ===== Alert (Erro) ===== */
+.alert-danger {
+    background: #fef2f2;
+    color: var(--danger-dark);
+    border-left: 4px solid var(--danger);
+    border-radius: var(--radius-lg);
+    padding: 0.75rem 1rem;
+    font-weight: var(--font-semibold);
+    font-size: 0.9rem;
+    animation: fadeDown 0.4s ease;
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Botão ===== */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    border-radius: var(--radius-xl);
+    color: var(--white);
+    font-weight: var(--font-bold);
+    padding: 1rem;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .btn-primary:active {
+        transform: translateY(0);
+    }
+
+    .btn-primary i {
+        margin-right: 0.5rem;
+    }
+
+/* ===== Links ===== */
+a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: var(--font-semibold);
+    transition: color var(--transition-fast);
+}
+
+    a:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+    }
+
+/* ===== Responsividade ===== */
+@media (max-width: 576px) {
+    .neoauth-card {
+        border-radius: var(--radius-xl);
+        margin: 1rem;
+    }
+
+    .neoauth-form {
+        padding: 1.5rem;
+    }
+
+    .neoauth-card h3 {
+        font-size: 1.4rem;
+    }
+}

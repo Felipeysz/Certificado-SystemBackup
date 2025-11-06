@@ -6,7 +6,11 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace AuthDemo.Controllers
 {
@@ -96,7 +100,7 @@ namespace AuthDemo.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var permission = User.FindFirst("Permission")?.Value ?? "Colaborador";
+            var permission = User.FindFirst(ClaimTypes.Role)?.Value ?? "Colaborador";
 
             // Buscar certificados reais do service
             var certificadosEntities = await _certificateService.GetAllAsync();
@@ -158,7 +162,7 @@ namespace AuthDemo.Controllers
             {
                 new Claim(ClaimTypes.Name, dto.Login),
                 new Claim("Token", result.Token),
-                new Claim("Permission", result.Permission)
+                new Claim(ClaimTypes.Role, result.Permission)
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

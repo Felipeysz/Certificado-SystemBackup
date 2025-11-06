@@ -1,168 +1,264 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
-    const certificatePreview = document.getElementById('certificatePreview');
-    const certificadoVazioImg = document.getElementById('certificadoVazioImg');
-    const form = document.getElementById('certificateForm');
-    const submitBtn = form.querySelector('button[type="submit"]');
+﻿// ===== CONFIG NOME ALUNO - Responsável pela configuração do nome do aluno =====
+document.addEventListener('DOMContentLoaded', function () {
+    // ===== ELEMENTOS DO DOM =====
+    const elements = {
+        form: document.getElementById('certificateForm'),
+        submitBtn: document.querySelector('#certificateForm button[type="submit"]'),
+        saveConfigBtn: document.getElementById('saveConfigBtn'),
+        nomeAlunoPreview: document.getElementById('nomeAlunoPreview'),
+        draggableNomeAluno: document.getElementById('draggableNomeAluno'),
+        nomeAlunoText: document.getElementById('nomeAlunoText'),
+        nomeAlunoConfigInput: document.getElementById('NomeAlunoConfig'),
+        certificatePreview: document.getElementById('certificatePreview'),
+        positionInfo: document.getElementById('positionInfo'),
+        posX: document.getElementById('posX'),
+        posY: document.getElementById('posY'),
+        toggleDraggables: document.getElementById('toggleDraggables'),
+        // Controles de estilo
+        fontSelector: document.getElementById('draggableFont'),
+        fontSizeInput: document.getElementById('draggableFontSize'),
+        fontColorInput: document.getElementById('draggableFontColor'),
+        fontWeightInput: document.getElementById('draggableFontWeight'),
+        textAlignSelector: document.getElementById('draggableTextAlign')
+    };
 
-    const fontSelector = document.getElementById('draggableFont');
-    const fontSizeInput = document.getElementById('draggableFontSize');
-    const fontColorInput = document.getElementById('draggableFontColor');
-    const fontWeightInput = document.getElementById('draggableFontWeight');
-    const textAlignSelector = document.getElementById('draggableTextAlign');
+    // Validação de elementos essenciais
+    if (!elements.form || !elements.certificatePreview) {
+        console.error('Erro: elementos principais não encontrados.');
+        return;
+    }
 
-    // Submit desabilitado por padrão
-    submitBtn.disabled = true;
+    // Estado
+    let isLocked = false;
+    let baseFontSize = 24; // Tamanho base da fonte
 
-    // Criar container para botões fora do preview
-    const buttonsContainer = document.createElement('div');
-    buttonsContainer.style.marginBottom = '10px';
-    certificatePreview.parentElement.insertBefore(buttonsContainer, certificatePreview);
+    // Desabilita submit até salvar configuração
+    if (elements.submitBtn) elements.submitBtn.disabled = true;
 
-    // Botão Adicionar Nome Aluno
-    const addNomeAlunoBtn = document.createElement('button');
-    addNomeAlunoBtn.innerText = 'Adicionar Exemplo Nome Aluno';
-    addNomeAlunoBtn.type = 'button';
-    addNomeAlunoBtn.className = 'btn btn-sm btn-primary mb-3 me-2';
-    buttonsContainer.appendChild(addNomeAlunoBtn);
+    // ===== FUNÇÃO DE AUTO-AJUSTE DE FONTE =====
+    const autoAdjustFontSize = () => {
+        if (!elements.nomeAlunoText || !elements.draggableNomeAluno) return;
 
-    // Botão Travar/Destravar
-    const lockNomeAlunoBtn = document.createElement('button');
-    lockNomeAlunoBtn.innerText = '🔒';
-    lockNomeAlunoBtn.type = 'button';
-    lockNomeAlunoBtn.className = 'btn btn-sm btn-secondary mb-3';
-    lockNomeAlunoBtn.disabled = true; // só habilita quando houver o texto
-    buttonsContainer.appendChild(lockNomeAlunoBtn);
+        const containerWidth = elements.draggableNomeAluno.offsetWidth || 400;
+        const text = elements.nomeAlunoText.textContent;
 
-    let isLockedGlobal = false;
-    let nomeAlunoDiv = null;
+        // Calcula tamanho base
+        baseFontSize = parseInt(elements.fontSizeInput?.value) || 24;
+        let currentFontSize = baseFontSize;
 
-    addNomeAlunoBtn.addEventListener('click', () => {
-        if (!certificadoVazioImg.src || certificadoVazioImg.style.display === 'none') {
-            alert('Carregue primeiro um certificado antes de adicionar o Nome do Aluno.');
-            return;
+        // Aplica tamanho temporário para medir
+        elements.nomeAlunoText.style.fontSize = currentFontSize + 'px';
+        elements.nomeAlunoText.style.whiteSpace = 'nowrap'; // Força uma linha
+
+        let textWidth = elements.nomeAlunoText.scrollWidth;
+
+        // Se o texto não couber, diminui a fonte progressivamente
+        while (textWidth > containerWidth && currentFontSize > 8) {
+            currentFontSize -= 1;
+            elements.nomeAlunoText.style.fontSize = currentFontSize + 'px';
+            textWidth = elements.nomeAlunoText.scrollWidth;
         }
 
-        if (nomeAlunoDiv) {
-            nomeAlunoDiv.style.left = '50px';
-            nomeAlunoDiv.style.top = '50px';
-            return;
+        // Atualiza o input visual (para referência do usuário)
+        if (elements.fontSizeInput && currentFontSize !== baseFontSize) {
+            elements.fontSizeInput.value = currentFontSize;
         }
 
-        nomeAlunoDiv = document.createElement('div');
-        nomeAlunoDiv.className = 'draggable-nome-aluno';
-        nomeAlunoDiv.innerText = 'Onde Ira Ficar o Nome do Aluno';
-        Object.assign(nomeAlunoDiv.style, {
-            position: 'absolute',
-            top: '50px',
-            left: '50px',
-            minWidth: '150px',
-            padding: '0 8px',
-            cursor: 'grab',
-            border: '2px dashed #000',
-            borderRadius: '6px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: textAlignSelector.value === 'center' ? 'center' :
-                textAlignSelector.value === 'left' ? 'flex-start' : 'flex-end',
-            fontFamily: fontSelector.value,
-            fontSize: fontSizeInput.value + 'px',
-            color: fontColorInput.value,
-            fontWeight: fontWeightInput.checked ? 'bold' : 'normal',
-            textAlign: textAlignSelector.value,
-            height: fontSizeInput.value + 'px',
-            lineHeight: fontSizeInput.value + 'px',
-            backgroundColor: 'transparent',
-            userSelect: 'none',
-            zIndex: 1000,
+        console.log(`📏 Auto-ajuste: ${baseFontSize}px → ${currentFontSize}px (Largura: ${textWidth}/${containerWidth})`);
+    };
+
+    // ===== FUNÇÕES DE TEXTO =====
+    const updateNomeAlunoText = () => {
+        if (!elements.nomeAlunoText) return;
+        elements.nomeAlunoText.textContent = elements.nomeAlunoPreview?.value || 'João da Silva';
+
+        // Auto-ajusta após mudar o texto
+        setTimeout(autoAdjustFontSize, 50);
+    };
+
+    const updateNomeAlunoStyle = () => {
+        if (!elements.nomeAlunoText) return;
+
+        const styles = {
+            fontFamily: elements.fontSelector?.value || 'Arial',
+            fontSize: (elements.fontSizeInput?.value || 24) + 'px',
+            color: elements.fontColorInput?.value || '#000000',
+            fontWeight: elements.fontWeightInput?.checked ? 'bold' : 'normal',
+            textAlign: elements.textAlignSelector?.value || 'center',
+            whiteSpace: 'nowrap', // ⭐ PREVINE QUEBRA DE LINHA
             overflow: 'hidden',
-            resize: 'horizontal',
-            transition: 'all 0.05s ease-out'
-        });
-
-        // Adiciona ao DOM, mas oculta da renderização do canvas
-        nomeAlunoDiv.style.pointerEvents = 'auto';
-        nomeAlunoDiv.dataset.skipRender = 'true'; // flag para html2canvas ignorar
-        certificatePreview.appendChild(nomeAlunoDiv);
-        lockNomeAlunoBtn.disabled = false;
-
-        let isDragging = false;
-        let offsetX = 0, offsetY = 0;
-
-        const updateStyle = () => {
-            nomeAlunoDiv.style.fontFamily = fontSelector.value;
-            nomeAlunoDiv.style.fontSize = fontSizeInput.value + 'px';
-            nomeAlunoDiv.style.color = fontColorInput.value;
-            nomeAlunoDiv.style.fontWeight = fontWeightInput.checked ? 'bold' : 'normal';
-            nomeAlunoDiv.style.height = fontSizeInput.value + 'px';
-            nomeAlunoDiv.style.lineHeight = fontSizeInput.value + 'px';
-            nomeAlunoDiv.style.justifyContent = textAlignSelector.value === 'center' ? 'center' :
-                textAlignSelector.value === 'left' ? 'flex-start' : 'flex-end';
-            nomeAlunoDiv.style.textAlign = textAlignSelector.value;
+            textOverflow: 'ellipsis'
         };
 
-        [fontSelector, fontSizeInput, fontColorInput, fontWeightInput, textAlignSelector].forEach(el => {
-            el.addEventListener('input', updateStyle);
-        });
+        Object.assign(elements.nomeAlunoText.style, styles);
 
-        // Drag e resize
-        nomeAlunoDiv.addEventListener('mousedown', e => {
-            if (isLockedGlobal) return;
+        // Recalcula tamanho base
+        baseFontSize = parseInt(elements.fontSizeInput?.value) || 24;
 
-            const rect = nomeAlunoDiv.getBoundingClientRect();
-            offsetX = e.clientX - rect.left;
-            offsetY = e.clientY - rect.top;
+        // Auto-ajusta após mudar o estilo
+        setTimeout(autoAdjustFontSize, 50);
+    };
 
-            const edgeSize = 10;
-            if (e.offsetX >= nomeAlunoDiv.offsetWidth - edgeSize) {
-                e.preventDefault();
-                const startX = e.clientX;
-                const startWidth = nomeAlunoDiv.offsetWidth;
+    // ===== DRAGGABLE COM INTERACT.JS =====
+    const initializeDraggable = () => {
+        if (!elements.draggableNomeAluno || !window.interact) {
+            console.warn('Interact.js não encontrado');
+            return;
+        }
 
-                const onMouseMoveResize = evt => {
-                    let newWidth = startWidth + (evt.clientX - startX);
-                    newWidth = Math.max(newWidth, 150);
-                    nomeAlunoDiv.style.width = newWidth + 'px';
-                    nomeAlunoDiv.style.justifyContent = textAlignSelector.value === 'center' ? 'center' :
-                        textAlignSelector.value === 'left' ? 'flex-start' : 'flex-end';
-                };
+        interact(elements.draggableNomeAluno).draggable({
+            inertia: true,
+            modifiers: [
+                interact.modifiers.restrictRect({
+                    restriction: 'parent',
+                    endOnly: true
+                })
+            ],
+            autoScroll: true,
+            listeners: {
+                start(event) {
+                    if (isLocked) return;
+                    event.target.classList.add('dragging');
+                },
+                move(event) {
+                    if (isLocked) return;
 
-                const onMouseUpResize = () => {
-                    document.removeEventListener('mousemove', onMouseMoveResize);
-                    document.removeEventListener('mouseup', onMouseUpResize);
-                };
+                    const target = event.target;
+                    const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+                    const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
-                document.addEventListener('mousemove', onMouseMoveResize);
-                document.addEventListener('mouseup', onMouseUpResize);
-                return;
+                    target.style.transform = `translate(${x}px, ${y}px)`;
+                    target.setAttribute('data-x', x);
+                    target.setAttribute('data-y', y);
+
+                    // Atualiza posição
+                    if (elements.posX) elements.posX.textContent = Math.round(x);
+                    if (elements.posY) elements.posY.textContent = Math.round(y);
+                },
+                end(event) {
+                    event.target.classList.remove('dragging');
+                }
             }
+        });
+    };
 
-            isDragging = true;
-            nomeAlunoDiv.style.border = '2px solid #007bff';
-            nomeAlunoDiv.style.cursor = 'grabbing';
+    // ===== MOSTRAR CAMPO DRAGGABLE =====
+    window.showDraggableNomeAluno = () => {
+        if (!elements.draggableNomeAluno) return;
+
+        elements.draggableNomeAluno.style.display = 'block';
+        if (elements.positionInfo) elements.positionInfo.style.display = 'block';
+
+        updateNomeAlunoText();
+        updateNomeAlunoStyle();
+        initializeDraggable();
+
+        // Auto-ajusta após exibir
+        setTimeout(autoAdjustFontSize, 100);
+    };
+
+    // ===== SALVAR CONFIGURAÇÃO =====
+    const saveConfiguration = () => {
+        if (!elements.draggableNomeAluno) {
+            alert('Primeiro faça upload do certificado e posicione o nome do aluno.');
+            return;
+        }
+
+        const rect = elements.draggableNomeAluno.getBoundingClientRect();
+        const parentRect = elements.certificatePreview.getBoundingClientRect();
+
+        // ⭐ Usa o tamanho REAL da fonte (após auto-ajuste)
+        const computedFontSize = window.getComputedStyle(elements.nomeAlunoText).fontSize;
+        const actualFontSize = parseFloat(computedFontSize);
+
+        const config = {
+            Top: Math.round(rect.top - parentRect.top) + 'px',
+            Left: Math.round(rect.left - parentRect.left) + 'px',
+            Width: Math.round(rect.width),
+            Height: actualFontSize,
+            FontFamily: elements.fontSelector?.value || 'Arial',
+            FontSize: actualFontSize + 'px', // ⭐ Salva tamanho real
+            BaseFontSize: baseFontSize + 'px', // ⭐ Salva tamanho base para referência
+            Color: elements.fontColorInput?.value || '#000000',
+            FontWeight: elements.fontWeightInput?.checked ? 'bold' : 'regular',
+            TextAlign: elements.textAlignSelector?.value || 'center'
+        };
+
+        elements.nomeAlunoConfigInput.value = JSON.stringify(config);
+
+        // Trava o campo
+        isLocked = true;
+        Object.assign(elements.draggableNomeAluno.style, {
+            borderColor: '#28a745',
+            cursor: 'default'
         });
 
-        document.addEventListener('mousemove', e => {
-            if (!isDragging || isLockedGlobal) return;
-            const parentRect = certificatePreview.getBoundingClientRect();
-            let left = Math.min(Math.max(e.clientX - parentRect.left - offsetX, 0), parentRect.width - nomeAlunoDiv.offsetWidth);
-            let top = Math.min(Math.max(e.clientY - parentRect.top - offsetY, 0), parentRect.height - nomeAlunoDiv.offsetHeight);
-            nomeAlunoDiv.style.left = left + 'px';
-            nomeAlunoDiv.style.top = top + 'px';
-        });
+        // Habilita submit
+        if (elements.submitBtn) elements.submitBtn.disabled = false;
 
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-            if (!isLockedGlobal) nomeAlunoDiv.style.border = '2px dashed #000';
-            nomeAlunoDiv.style.cursor = 'grab';
-        });
+        // Feedback visual
+        elements.saveConfigBtn.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i>Configuração Salva!';
+        elements.saveConfigBtn.classList.replace('btn-outline-success', 'btn-success');
+        elements.saveConfigBtn.disabled = true;
 
-        lockNomeAlunoBtn.addEventListener('click', () => {
-            isLockedGlobal = !isLockedGlobal;
-            nomeAlunoDiv.style.border = isLockedGlobal ? '2px solid green' : '2px dashed #000';
-            lockNomeAlunoBtn.innerText = isLockedGlobal ? '✅' : '🔒';
+        showSuccessMessage('Configuração do nome do aluno salva com sucesso!');
+        console.log('Configuração salva:', config);
+    };
 
-            // Habilita submit apenas se travado
-            submitBtn.disabled = !isLockedGlobal;
-        });
+    // ===== MENSAGEM DE SUCESSO =====
+    const showSuccessMessage = (message) => {
+        const alert = document.createElement('div');
+        alert.className = 'alert alert-success alert-dismissible fade show';
+        alert.innerHTML = `
+            <i class="bi bi-check-circle-fill me-2"></i>${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+
+        const container = document.querySelector('.neo-container');
+        if (container) {
+            container.insertBefore(alert, container.firstChild);
+            setTimeout(() => alert.remove(), 5000);
+        }
+    };
+
+    // ===== EVENT LISTENERS =====
+    // Atualizar texto
+    elements.nomeAlunoPreview?.addEventListener('input', updateNomeAlunoText);
+
+    // Atualizar estilos
+    [elements.fontSelector, elements.fontSizeInput, elements.fontColorInput,
+    elements.fontWeightInput, elements.textAlignSelector].forEach(el => {
+        if (el) {
+            el.addEventListener('input', updateNomeAlunoStyle);
+            el.addEventListener('change', updateNomeAlunoStyle);
+        }
     });
+
+    // Salvar configuração
+    elements.saveConfigBtn?.addEventListener('click', saveConfiguration);
+
+    // Toggle draggables
+    elements.toggleDraggables?.addEventListener('change', function () {
+        if (elements.draggableNomeAluno) {
+            elements.draggableNomeAluno.style.display = this.checked ? 'block' : 'none';
+        }
+    });
+
+    // Validação no submit
+    elements.form?.addEventListener('submit', function (e) {
+        if (!elements.nomeAlunoConfigInput?.value) {
+            e.preventDefault();
+            alert('Por favor, salve a configuração do nome do aluno antes de enviar o formulário.');
+            return false;
+        }
+    });
+
+    // ⭐ Re-ajusta ao redimensionar janela
+    window.addEventListener('resize', () => {
+        if (elements.draggableNomeAluno?.style.display !== 'none') {
+            autoAdjustFontSize();
+        }
+    });
+
+    console.log('Config Nome Aluno carregado com sucesso!');
 });

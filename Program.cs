@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.DataProtection;
 using System.IO;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +53,9 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<ICertificateRepository, CertificateRepository>();
 builder.Services.AddScoped<CertificateService>();
 builder.Services.AddValidatorsFromAssemblyContaining<AuthService>();
+builder.Services.AddSingleton<CloudStorageService>();
+builder.Services.AddScoped<ITrilhaRepository, TrilhaRepository>();
+builder.Services.AddScoped<TrilhaService>();
 
 // --- Autenticação por cookie ---
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

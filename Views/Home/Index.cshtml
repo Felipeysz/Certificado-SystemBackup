@@ -1,6 +1,5 @@
 ﻿@model AuthDemo.DTOs.DashboardViewModel
 
-
 @{
     ViewData["Title"] = "Dashboard";
     var permission = Model.Permission;
@@ -31,7 +30,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h5 class="card-title mb-0">Certificados</h5>
-                        @if (permission == "Admin")
+                        @if (permission == "Admin" || permission == "Instrutor")
                         {
                             <a asp-controller="Certificados" asp-action="Create" class="btn btn-sm btn-primary neo-btn mb-2">
                                 Criar Certificado
@@ -46,32 +45,35 @@
                             {
                                 <div class="certificado-card neo-card position-relative">
                                     <div class="certificado-img-wrapper">
-                                        <a href="@Url.Action("View", "Certificados", new { id = c.Id })">
-                                            <img src="@(!string.IsNullOrEmpty(c.CertificadoVazio) ? c.CertificadoVazio : "~/images/certificados/placeholder.png")"
-                                                 class="certificado-img"
-                                                 alt="@c.NomeCurso" />
-                                            <span class="certificado-view-icon position-absolute top-50 start-50 translate-middle text-white fs-3">
-                                                <i class="bi bi-eye"></i>
-                                            </span>
-                                        </a>
+                                        <img src="@(!string.IsNullOrEmpty(c.CertificadoVazio) ? c.CertificadoVazio : "~/images/certificados/placeholder.png")"
+                                             class="certificado-img"
+                                             alt="@c.NomeCurso" />
                                     </div>
                                     <div class="card-body text-center">
                                         <h6 class="card-title">@c.NomeCurso</h6>
                                         <p class="card-text mb-1"><strong>Emissão:</strong> @c.DataEmissao</p>
                                         <div class="mt-2 d-flex justify-content-center gap-2 flex-wrap">
-                                            <form asp-controller="Certificados" asp-action="Delete" method="post" class="m-0">
-                                                @Html.AntiForgeryToken()
-                                                <input type="hidden" name="id" value="@c.Id" />
-                                                <button type="submit" class="btn btn-sm btn-outline-danger neo-btn-sm"
-                                                        onclick="return confirm('Confirma exclusão do certificado @c.NomeCurso?');">
-                                                    Deletar
-                                                </button>
-                                            </form>
+                                            @if (permission == "Admin")
+                                            {
+                                                <form asp-controller="Certificados" asp-action="Delete" method="post" class="m-0">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="id" value="@c.Id" />
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger neo-btn-sm"
+                                                            onclick="return confirm('Confirma exclusão do certificado @c.NomeCurso?');">
+                                                        Deletar
+                                                    </button>
+                                                </form>
+                                            }
 
-                                            <button type="button" class="btn btn-sm btn-outline-success neo-btn-sm copiar-link-btn"
-                                                    data-nomecurso="@c.NomeCurso">
-                                                Enviar Aluno
-                                            </button>
+                                            @if (permission == "Admin" || permission == "Instrutor")
+                                            {
+                                                <!-- Certificar um aluno individual -->
+                                                <a href="@Url.Action("EnviarAluno", "Certificados", new { nomeCurso = c.NomeCurso })"
+                                                   class="btn btn-sm btn-outline-success neo-btn-sm"
+                                                   title="Certificar um aluno">
+                                                    <i class="bi bi-person-check"></i> Certificado
+                                                </a>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +83,11 @@
                     else
                     {
                         <div class="alert alert-info text-center neoalert-info">
-                            Nenhum certificado cadastrado ainda. Clique em <strong>Criar Certificado</strong> para adicionar o primeiro!
+                            Nenhum certificado cadastrado ainda.
+                            @if (permission == "Admin" || permission == "Instrutor")
+                            {
+                                <span>Clique em <strong>Criar Certificado</strong> para adicionar o primeiro!</span>
+                            }
                         </div>
                     }
                 </div>
@@ -127,39 +133,49 @@
             </div>
         </div>
     </div>
+
+    <!-- ========================================== -->
+    <!-- SEÇÃO: TRILHAS DE CERTIFICADOS -->
+    <!-- ========================================== -->
+    @if (permission == "Admin" || permission == "Instrutor")
+    {
+        <div class="row g-4 mt-3">
+            <div class="col-12">
+                <div class="card neo-card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-route"></i> Trilhas de Certificados
+                            </h5>
+                            <div>
+                                <a asp-controller="Trilhas" asp-action="Index" class="btn btn-sm btn-info neo-btn">
+                                    <i class="fas fa-list"></i> Gerenciar Trilhas
+                                </a>
+                                <a asp-controller="Trilhas" asp-action="Create" class="btn btn-sm btn-primary neo-btn">
+                                    <i class="fas fa-plus"></i> Nova Trilha
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info neoalert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Trilhas</strong> são conjuntos de certificados que podem ser compartilhados por link público.
+                            Crie trilhas para organizar cursos relacionados!
+                        </div>
+
+                        <div class="text-center">
+                            <a asp-controller="Trilhas" asp-action="Index" class="btn btn-lg btn-outline-primary">
+                                <i class="fas fa-graduation-cap"></i> Acessar Gerenciamento de Trilhas
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/styleDashboard.css" />
-}
-
-@section Scripts {
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const buttons = document.querySelectorAll('.copiar-link-btn');
-
-            buttons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const nomeCurso = btn.dataset.nomecurso;
-                    const url = `${window.location.origin}/certificado/${encodeURIComponent(nomeCurso)}`;
-
-                    const tempInput = document.createElement('input');
-                    tempInput.value = url;
-                    document.body.appendChild(tempInput);
-                    tempInput.select();
-                    tempInput.setSelectionRange(0, 99999);
-                    document.execCommand('copy');
-                    document.body.removeChild(tempInput);
-
-                    const originalText = btn.innerText;
-                    btn.innerText = 'Link copiado!';
-                    btn.classList.add('btn-success');
-                    setTimeout(() => {
-                        btn.innerText = originalText;
-                        btn.classList.remove('btn-success');
-                    }, 2000);
-                });
-            });
-        });
-    </script>
+    <link href="~/css/Home/IndexHome.css" rel="stylesheet" />
+    <link href="~/css/ThemaVarieble.css" rel="stylesheet" />
 }
