@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Certificado.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251107152141_InitialPostgreSQL")]
-    partial class InitialPostgreSQL
+    [Migration("20251107170308_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,10 +104,10 @@ namespace Certificado.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("DataAtualizacao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DataCriacao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Descricao")
                         .HasMaxLength(500)
