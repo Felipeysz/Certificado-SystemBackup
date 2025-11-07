@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using iText.Kernel.Pdf;
+using iText.Kernel.Utils;
 
 namespace AuthDemo.Services
 {
@@ -148,7 +150,7 @@ namespace AuthDemo.Services
         }
 
         /// <summary>
-        /// Gera certificados de uma trilha para um aluno
+        /// 🆕 Gera certificados de uma trilha como um ÚNICO PDF com múltiplas páginas
         /// </summary>
         public async Task<MemoryStream> GerarCertificadosTrilhaAsync(int trilhaId, string nomeAluno)
         {
@@ -166,11 +168,114 @@ namespace AuthDemo.Services
             Console.WriteLine($"🎓 Gerando certificados da trilha '{trilha.Nome}' para: {nomeAluno}");
             Console.WriteLine($"📚 Total de certificados: {trilha.CertificadosIdsList.Count}");
 
-            // Usa o método existente do CertificateService
-            return await _certificateService.GerarTrilhaCertificadosAsync(
-                trilha.CertificadosIdsList,
-                nomeAluno
-            );
+            var outputStream = new MemoryStream();
+            var todosCertificados = await _certificateRepository.GetAllAsync();
+
+            int totalProcessados = 0;
+            int totalSucesso = 0;
+            int totalErros = 0;
+            var certificadosGerados = new List<string>();
+            var errosDetalhados = new List<string>();
+
+            // Lista para armazenar os PDFs temporários
+            var pdfsBytesList = new List<byte[]>();
+
+            // Gera cada certificado individualmente
+            foreach (var certId in trilha.CertificadosIdsList)
+            {
+                totalProcessados++;
+                var certificado = todosCertificados.FirstOrDefault(c => c.Id == certId);
+
+                if (certificado == null)
+                {
+                    totalErros++;
+                    var erro = $"Certificado ID {certId} não encontrado no banco de dados";
+                    Console.WriteLine($"  ❌ {erro}");
+                    errosDetalhados.Add(erro);
+                    continue;
+                }
+
+                try
+                {
+                    Console.WriteLine($"  ➡️ [{totalProcessados}/{trilha.CertificadosIdsList.Count}] Gerando: {certificado.NomeCurso}");
+
+                    // Gera o certificado usando o método existente
+                    var pdfBytes = await _certificateService.CertificarAlunoAsync(certificado.NomeCurso, nomeAluno.Trim());
+                    pdfsBytesList.Add(pdfBytes);
+
+                    totalSucesso++;
+                    certificadosGerados.Add(certificado.NomeCurso);
+                    Console.WriteLine($"  ✅ Certificado gerado: {certificado.NomeCurso}");
+                }
+                catch (Exception ex)
+                {
+                    totalErros++;
+                    var erro = $"Erro ao gerar '{certificado.NomeCurso}': {ex.Message}";
+                    Console.WriteLine($"  ❌ {erro}");
+                    errosDetalhados.Add(erro);
+                }
+            }
+
+            // ⭐ Verifica se há pelo menos um certificado gerado
+            if (!pdfsBytesList.Any())
+            {
+                throw new Exception("Nenhum certificado foi gerado com sucesso. Verifique os erros:\n" +
+                    string.Join("\n", errosDetalhados));
+            }
+
+            // ⭐ Mescla todos os PDFs em um único documento
+            Console.WriteLine($"📄 Mesclando {pdfsBytesList.Count} certificados em um único PDF...");
+
+            try
+            {
+                using (var writer = new PdfWriter(outputStream))
+                {
+                    writer.SetCloseStream(false);
+
+                    using (var mergedPdf = new PdfDocument(writer))
+                    {
+                        var merger = new PdfMerger(mergedPdf);
+
+                        foreach (var pdfBytes in pdfsBytesList)
+                        {
+                            using (var memStream = new MemoryStream(pdfBytes))
+                            using (var reader = new PdfReader(memStream))
+                            using (var sourcePdf = new PdfDocument(reader))
+                            {
+                                // Adiciona todas as páginas do PDF ao documento mesclado
+                                merger.Merge(sourcePdf, 1, sourcePdf.GetNumberOfPages());
+                            }
+                        }
+
+                        merger.Close();
+                    }
+                }
+
+                outputStream.Seek(0, SeekOrigin.Begin);
+
+                Console.WriteLine($"✅ PDF único gerado com sucesso:");
+                Console.WriteLine($"   📚 Total de certificados: {totalProcessados}");
+                Console.WriteLine($"   ✅ Sucesso: {totalSucesso}");
+                Console.WriteLine($"   ❌ Erros: {totalErros}");
+                Console.WriteLine($"   📄 Tamanho do arquivo: {outputStream.Length} bytes");
+
+                if (errosDetalhados.Any())
+                {
+                    Console.WriteLine($"⚠️ Erros encontrados:");
+                    foreach (var erro in errosDetalhados)
+                    {
+                        Console.WriteLine($"   • {erro}");
+                    }
+                }
+
+                return outputStream;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Erro ao mesclar PDFs: {ex.Message}");
+                Console.WriteLine($"StackTrace: {ex.StackTrace}");
+                throw new Exception($"Erro ao mesclar certificados em PDF único: {ex.Message}", ex);
+            }
         }
 
         /// <summary>
@@ -214,5 +319,4 @@ namespace AuthDemo.Services
         public DateTime DataCriacao { get; set; }
         public List<CertificadoResumoDto> Certificados { get; set; } = new();
     }
-
 }

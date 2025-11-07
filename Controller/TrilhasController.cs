@@ -246,7 +246,7 @@ namespace AuthDemo.Controllers
 
         /// <summary>
         /// POST: /Trilhas/Gerar/{id}
-        /// Gera certificados da trilha PUBLICAMENTE
+        /// Gera certificados da trilha PUBLICAMENTE como PDF único
         /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -263,25 +263,23 @@ namespace AuthDemo.Controllers
             {
                 Console.WriteLine($"🎓 Gerando certificados da trilha ID {id}: {nomeAluno.Trim()}");
 
-                var zipStream = await _trilhaService.GerarCertificadosTrilhaAsync(id, nomeAluno.Trim());
+                var pdfStream = await _trilhaService.GerarCertificadosTrilhaAsync(id, nomeAluno.Trim());
 
                 var trilha = await _trilhaService.GetByIdAsync(id);
 
-                // ✅ VALIDAÇÃO ADICIONADA - Verifica se trilha existe
                 if (trilha == null)
                 {
                     throw new Exception("Trilha não encontrada");
                 }
 
-                // ✅ VALIDAÇÃO ADICIONADA - Garante que Nome não é null
                 var nomeTrilha = trilha.Nome ?? "Trilha";
                 var safeNome = string.Concat(nomeAluno.Trim().Split(Path.GetInvalidFileNameChars()));
                 var safeTrilha = string.Concat(nomeTrilha.Split(Path.GetInvalidFileNameChars()));
-                var outputFileName = $"{safeTrilha}_{safeNome}_{DateTime.Now:yyyyMMdd_HHmmss}.zip";
+                var outputFileName = $"{safeTrilha}_{safeNome}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf"; // 🆕 Mudou de .zip para .pdf
 
                 Console.WriteLine($"✅ Certificados gerados: {outputFileName}");
 
-                return File(zipStream, "application/zip", outputFileName);
+                return File(pdfStream, "application/pdf", outputFileName); // 🆕 Mudou de application/zip para application/pdf
             }
             catch (Exception ex)
             {

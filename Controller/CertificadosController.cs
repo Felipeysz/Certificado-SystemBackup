@@ -114,15 +114,16 @@ namespace AuthDemo.Controllers
 
         /// <summary>
         /// GET: /Certificados/EnviarAluno?nomeCurso=NomeDoCurso
-        /// Exibe formulário para certificar um único aluno
+        /// Exibe formulário para certificar um único aluno (PÚBLICO)
         /// </summary>
         [HttpGet]
+        [AllowAnonymous] // 🆕 Permite acesso sem autenticação
         public IActionResult EnviarAluno(string nomeCurso)
         {
             if (string.IsNullOrWhiteSpace(nomeCurso))
             {
                 TempData["ErrorMessage"] = "Nome do curso não informado.";
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Auth"); // 🆕 Redireciona para login se não autenticado
             }
 
             ViewBag.NomeCurso = nomeCurso;
@@ -131,9 +132,10 @@ namespace AuthDemo.Controllers
 
         /// <summary>
         /// POST: /Certificados/EnviarAluno
-        /// Gera certificado para um único aluno e retorna PDF para download
+        /// Gera certificado para um único aluno e retorna PDF para download (PÚBLICO)
         /// </summary>
         [HttpPost]
+        [AllowAnonymous] // 🆕 Permite acesso sem autenticação
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EnviarAluno(string nomeCurso, string nomeAluno)
         {
