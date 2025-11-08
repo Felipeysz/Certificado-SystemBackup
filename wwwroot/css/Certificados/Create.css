@@ -106,12 +106,10 @@
 }
 
 /* ===== Draggables e Pré-visualização ===== */
-/* ===== Draggables e Pré-visualização ===== */
 .certificate-preview-area {
     min-height: 450px;
     background: var(--gray-50);
     border: 2px dashed var(--border-light);
-    border-radius: var(--radius-xl);
     position: relative;
     overflow: hidden;
     display: flex;

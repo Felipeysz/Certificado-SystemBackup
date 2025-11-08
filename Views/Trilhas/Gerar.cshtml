@@ -33,6 +33,164 @@
                 background-color: #f8f9fa;
                 transform: translateX(5px);
             }
+
+        /* Instagram Card Styles */
+        .instagram-card {
+            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            color: #ffffff;
+            box-shadow: 0 10px 30px rgba(188, 24, 136, 0.3);
+            animation: fadeInUp 0.8s ease 0.3s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .instagram-card::before {
+                content: "";
+                position: absolute;
+                top: -50%;
+                right: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+                animation: floatAnim 6s ease-in-out infinite;
+            }
+
+        .instagram-icon {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            animation: bounceAnim 2s infinite;
+        }
+
+        .instagram-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .instagram-text {
+            font-size: 1.0625rem;
+            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .instagram-link {
+            color: #ffffff;
+            font-weight: 700;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.5rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+            .instagram-link:hover {
+                background: rgba(255, 255, 255, 0.35);
+                transform: scale(1.05);
+                color: #ffffff;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+        .instagram-examples {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 0.875rem;
+            padding: 1.25rem;
+            margin-top: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+            .instagram-examples strong {
+                display: block;
+                margin-bottom: 0.75rem;
+                font-size: 1.0625rem;
+            }
+
+            .instagram-examples ul {
+                margin: 0;
+                padding-left: 1.5rem;
+                list-style: none;
+            }
+
+            .instagram-examples li {
+                margin-bottom: 0.5rem;
+                position: relative;
+                padding-left: 0.5rem;
+            }
+
+                .instagram-examples li::before {
+                    content: "✓";
+                    position: absolute;
+                    left: -1rem;
+                    font-weight: bold;
+                    color: #ffffff;
+                }
+
+        .instagram-cta {
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.0625rem;
+            margin-top: 1.25rem;
+            margin-bottom: 0;
+        }
+
+        /* Animações */
+        @@keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @@keyframes bounceAnim {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @@keyframes floatAnim {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(-20px, -20px) rotate(180deg);
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @@media (max-width: 768px) {
+            .instagram-card {
+                padding: 1.5rem;
+            }
+
+            .instagram-title {
+                font-size: 1.25rem;
+            }
+
+            .instagram-text {
+                font-size: 0.9375rem;
+            }
+
+            .instagram-icon {
+                font-size: 2rem;
+            }
+        }
     </style>
 }
 
@@ -161,20 +319,38 @@
                 </div>
             </div>
 
-            <!-- Info Card -->
-            <div class="card mt-4 shadow-sm">
-                <div class="card-header bg-light">
-                    <h5 class="mb-0">
-                        <i class="fas fa-question-circle"></i> O que vou receber?
-                    </h5>
+            <!-- ⭐ NOVO: Card de Instagram (substituindo Info Card) -->
+            <div class="instagram-card mt-4">
+                <div class="instagram-icon">
+                    <i class="fab fa-instagram"></i>
                 </div>
-                <div class="card-body">
-                    <ul class="mb-0">
-                        <li><strong>@Model.Certificados.Count arquivos PDF</strong> com seu nome preenchido</li>
-                        <li><strong>1 arquivo de resumo</strong> com informações da geração</li>
-                        <li>Tudo organizado em um <strong>arquivo ZIP</strong> para download</li>
+                <h5 class="instagram-title">
+                    <i class="fas fa-gift"></i> Ganhe um Presentinho!
+                </h5>
+                <p class="instagram-text">
+                    Parabéns por terminar esta trilha! 🎉
+                    <br><br>
+                    Se você enviar a foto dos certificados no Instagram
+                    <a href="https://instagram.com/expertacademypro"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="instagram-link">
+                        @@expertacademypro
+                    </a>
+                    irei te dar um presentinho. ❤️
+                </p>
+                <div class="instagram-examples">
+                    <strong>💡 Exemplos de envio:</strong>
+                    <ul>
+                        <li>Certificados no quadro</li>
+                        <li>Certificados na parede</li>
+                        <li>Segurando os certificados</li>
+                        <li>Use sua criatividade!</li>
                     </ul>
                 </div>
+                <p class="instagram-cta">
+                    Basta postar e marcar a gente, conto com você! 🚀
+                </p>
             </div>
         </div>
     </div>
