@@ -299,57 +299,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     };
 
-    // ===== FUNÇÕES PARA REMOVER/RESTAURAR ESTILOS DE EDIÇÃO =====
-    const removeEditingStyles = () => {
-        const savedStyles = [];
-
-        // Esconde completamente o nome do aluno
-        if (elements.draggableNomeAluno) {
-            const originalDisplay = elements.draggableNomeAluno.style.display;
-            savedStyles.push({
-                element: elements.draggableNomeAluno,
-                styles: { display: originalDisplay }
-            });
-            elements.draggableNomeAluno.style.display = 'none';
-        }
-
-        // Remove estilos dos campos opcionais arrastáveis
-        const draggableDivs = elements.certificatePreview.querySelectorAll('.draggable-div');
-        draggableDivs.forEach(div => {
-            if (div.dataset.isEditing === 'true') {
-                const originalStyles = {
-                    cursor: div.style.cursor,
-                    padding: div.style.padding,
-                    background: div.style.background,
-                    border: div.style.border,
-                    borderRadius: div.style.borderRadius,
-                    minWidth: div.style.minWidth,
-                    minHeight: div.style.minHeight
-                };
-                savedStyles.push({ element: div, styles: originalStyles });
-
-                Object.assign(div.style, {
-                    cursor: 'default',
-                    padding: '0',
-                    background: 'transparent',
-                    border: 'none',
-                    borderRadius: '0',
-                    minWidth: 'auto',
-                    minHeight: 'auto'
-                });
-            }
-        });
-
-        return savedStyles;
-    };
-
-    const restoreEditingStyles = (savedStyles) => {
-        savedStyles.forEach(({ element, styles }) => {
-            Object.assign(element.style, styles);
-        });
-    };
-
-    // ===== FUNÇÕES PARA REMOVER/RESTAURAR ESTILOS DE EDIÇÃO =====
+    // ===== FUNÇÕES PARA REMOVER/RESTAURAR ESTILOS DE EDIÇÃO ===== (VERSÃO ÚNICA E CONSOLIDADA)
     const removeEditingStyles = () => {
         const savedStyles = [];
 
@@ -409,6 +359,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         return savedStyles;
+    };
+
+    const restoreEditingStyles = (savedStyles) => {
+        savedStyles.forEach(({ element, styles }) => {
+            Object.assign(element.style, styles);
+        });
     };
 
     // ===== PREVIEW DO CERTIFICADO =====
