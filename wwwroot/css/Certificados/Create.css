@@ -105,20 +105,22 @@
     }
 }
 
-/* ===== Draggables e Pré-visualização ===== */
-/* ⭐ CRÍTICO: Container dinâmico sem altura mínima fixa */
+/* ===== ÁREA DE PRÉ-VISUALIZAÇÃO DO CERTIFICADO ===== */
+/* ⭐ Container dinâmico - altura definida pelo JavaScript */
 .certificate-preview-area {
     background: var(--gray-50);
     border: 2px dashed var(--border-light);
+    border-radius: 8px;
     position: relative;
-    overflow: visible; /* Permite que conteúdo seja visível */
-    display: block; /* Remove flex para não forçar centralização */
+    overflow: hidden;
+    display: block;
     padding: 0;
     margin: 0;
     width: 100%;
-    /* ⭐ Remove min-height fixa - será definida dinamicamente pelo JS */
+    min-height: 450px; /* Padrão inicial */
 }
 
+/* Placeholder quando não há certificado carregado */
 .preview-placeholder {
     color: var(--text-muted);
     animation: fadeIn 0.3s ease-in-out;
@@ -126,15 +128,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 450px; /* Apenas para placeholder */
+    min-height: 450px;
+    padding: 3rem;
 }
 
-/* ⭐ Canvas ocupa 100% do container, sem margens */
+/* ⭐ Canvas - renderização do PDF */
 .pdf-preview-canvas {
     display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
     width: 100% !important;
-    height: auto !important;
-    max-width: 100% !important;
+    height: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
@@ -142,12 +147,14 @@
     object-fit: contain;
 }
 
-/* ⭐ Imagem ocupa 100% do container, sem margens */
+/* ⭐ Imagem - fallback para PNG/JPG */
 #certificadoVazioImg {
     display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
     width: 100% !important;
-    height: auto !important;
-    max-width: 100% !important;
+    height: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
@@ -155,52 +162,137 @@
     object-fit: contain;
 }
 
-/* ⭐ Campos arrastáveis posicionados sobre o certificado */
+/* ===== CAMPOS DRAGGABLES (NOME E DATA) ===== */
 .draggable-field {
     position: absolute;
     cursor: move;
+    padding: 8px 12px;
+    background-color: rgba(13, 110, 253, 0.1);
+    border: 2px dashed #0d6efd;
+    border-radius: 8px;
+    min-width: 150px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 1000;
     user-select: none;
-    z-index: 10;
-    padding: 4px 8px;
-    background: rgba(255, 235, 59, 0.3);
-    border: 2px dashed #ffc107;
-    border-radius: var(--radius-sm);
-    transition: all var(--transition-fast);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
-    .draggable-field:hover {
-        background: rgba(255, 235, 59, 0.5);
-        border-color: #ff9800;
+    .draggable-field:hover:not(.dragging):not([data-locked="true"]) {
+        border-color: #0056b3;
+        background-color: rgba(13, 110, 253, 0.15);
     }
 
     .draggable-field.dragging {
         opacity: 0.8;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1001;
         cursor: grabbing !important;
     }
 
+    /* ⭐ Campo travado após salvar configuração */
+    .draggable-field[data-locked="true"],
+    .draggable-field[style*="border-color: rgb(40, 167, 69)"] {
+        border-color: #28a745 !important;
+        background-color: rgba(40, 167, 69, 0.05) !important;
+        cursor: default !important;
+        opacity: 0.7;
+    }
+
+/* ⭐ ESTILO ESPECÍFICO PARA DATA DE EMISSÃO */
+#draggableDataEmissao {
+    background-color: rgba(40, 167, 69, 0.1) !important;
+    border: 2px dashed #28a745 !important;
+}
+
+    #draggableDataEmissao:hover:not(.dragging):not([data-locked="true"]) {
+        border-color: #1e7e34 !important;
+        background-color: rgba(40, 167, 69, 0.15) !important;
+    }
+
+    #draggableDataEmissao.dragging {
+        border-color: #1e7e34 !important;
+        background-color: rgba(40, 167, 69, 0.15) !important;
+        box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3) !important;
+    }
+
+/* ===== TEXTO DENTRO DOS CAMPOS DRAGGABLES ===== */
 .draggable-text {
-    font-weight: var(--font-semibold);
-    display: block;
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    color: #000000;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    text-align: center;
+    pointer-events: none;
 }
 
+/* ===== HANDLE DE ARRASTAR ===== */
 .drag-handle {
-    display: none;
     position: absolute;
-    bottom: -8px;
+    top: -8px;
     right: -8px;
-    background: var(--primary);
-    color: var(--white);
+    width: 24px;
+    height: 24px;
+    background-color: #0d6efd;
+    color: white;
     border-radius: 50%;
-    padding: 4px;
-    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    cursor: move;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
 }
 
-.draggable-field:hover .drag-handle {
-    display: block;
+    .drag-handle i {
+        pointer-events: none;
+    }
+
+/* Handle verde para data de emissão */
+#draggableDataEmissao .drag-handle {
+    background-color: #28a745 !important;
 }
 
-/* ⭐ Campos opcionais arrastáveis */
+    #draggableDataEmissao .drag-handle:hover {
+        background-color: #1e7e34 !important;
+    }
+
+/* Esconder handle quando campo está travado */
+.draggable-field[data-locked="true"] .drag-handle,
+.draggable-field[style*="border-color: rgb(40, 167, 69)"] .drag-handle {
+    display: none !important;
+}
+
+/* ===== 🔥 CRÍTICO: OCULTAÇÃO DURANTE CAPTURA DE PDF 🔥 ===== */
+/* Estes estilos garantem que os campos draggables não apareçam no PDF */
+.pdf-capture,
+.draggable-field.pdf-capture,
+#draggableNomeAluno.pdf-capture,
+#draggableDataEmissao.pdf-capture {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+    /* Garantir que os handles não apareçam na captura */
+    .pdf-capture .drag-handle,
+    .draggable-field.pdf-capture .drag-handle {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+
+/* ⭐ Campos opcionais arrastáveis (se houver) */
 .draggable-div {
     position: absolute;
     cursor: move;
@@ -214,51 +306,33 @@
         transform: scale(1.02);
     }
 
-/* ===== Estilo específico para o campo de Data de Emissão ===== */
-#draggableDataEmissao {
-    border: 2px dashed #28a745 !important;
-    background-color: rgba(40, 167, 69, 0.05) !important;
-    min-width: 150px !important;
-    padding: 8px 12px !important;
-}
-
-    #draggableDataEmissao:hover {
-        border-color: #1e7e34 !important;
-        background-color: rgba(40, 167, 69, 0.1) !important;
+    .draggable-div[data-is-editing="true"] {
+        background: rgba(255, 235, 59, 0.3);
+        border: 2px dashed #ffc107;
+        border-radius: var(--radius-sm);
+        padding: 4px 8px;
     }
 
-    #draggableDataEmissao.dragging {
-        border-color: #1e7e34 !important;
-        background-color: rgba(40, 167, 69, 0.15) !important;
-        box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3) !important;
-    }
-
-    #draggableDataEmissao .drag-handle {
-        background-color: #28a745 !important;
-    }
-
-        #draggableDataEmissao .drag-handle:hover {
-            background-color: #1e7e34 !important;
-        }
-
-    /* Quando os campos estão salvos */
-    #draggableDataEmissao[style*="border-color: rgb(40, 167, 69)"] {
-        cursor: default !important;
-        opacity: 0.7;
-    }
-
-        #draggableDataEmissao[style*="border-color: rgb(40, 167, 69)"] .drag-handle {
-            display: none;
-        }
-
-/* ===== Position Info ===== */
+/* ===== INFORMAÇÕES DE POSIÇÃO ===== */
 #positionInfo {
+    font-size: 0.875rem;
+    background-color: #e9ecef;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    margin-top: 1rem;
     border: 1px solid var(--border-light);
-    font-size: 0.85rem;
-    background-color: var(--gray-50);
 }
 
-/* ===== Botões ===== */
+    #positionInfo strong {
+        color: #495057;
+    }
+
+    #positionInfo span {
+        color: #0d6efd;
+        font-weight: 600;
+    }
+
+/* ===== BOTÕES ===== */
 .btn {
     border-radius: var(--radius-lg);
     font-weight: var(--font-semibold);
@@ -306,13 +380,17 @@
         transform: scale(1.2);
     }
 
-/* ===== Sticky Preview ===== */
-.sticky-preview {
-    position: sticky;
-    top: 2rem;
+/* ===== Sticky Preview (Desktop) ===== */
+@media (min-width: 992px) {
+    .sticky-preview {
+        position: sticky;
+        top: 2rem;
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+    }
 }
 
-/* ===== Responsividade ===== */
+/* ===== RESPONSIVIDADE ===== */
 @media (max-width: 992px) {
     .sticky-preview {
         position: static;
@@ -323,17 +401,67 @@
     }
 }
 
-/* ⭐ Ajustes para zoom da página */
+@media (max-width: 768px) {
+    .draggable-field {
+        min-width: 120px;
+        padding: 6px 10px;
+    }
+
+    .draggable-text {
+        font-size: 18px;
+    }
+
+    .drag-handle {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+        top: -6px;
+        right: -6px;
+    }
+}
+
+/* ⭐ Ajustes para diferentes níveis de zoom */
 @media screen {
     .certificate-preview-area {
-        /* Garante que o container se adapte ao zoom */
         box-sizing: border-box;
     }
 
     .pdf-preview-canvas,
     #certificadoVazioImg {
-        /* Mantém proporções no zoom */
         image-rendering: -webkit-optimize-contrast;
         image-rendering: crisp-edges;
+    }
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes fadeInField {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.draggable-field {
+    animation: fadeInField 0.3s ease;
+}
+
+    /* ===== ESTADOS DE FOCO E ACESSIBILIDADE ===== */
+    .draggable-field:focus-visible {
+        outline: 3px solid var(--primary);
+        outline-offset: 2px;
+    }
+
+/* ===== IMPRESSÃO (caso necessário) ===== */
+@media print {
+    .draggable-field,
+    .drag-handle,
+    #draggableNomeAluno,
+    #draggableDataEmissao {
+        display: none !important;
     }
 }

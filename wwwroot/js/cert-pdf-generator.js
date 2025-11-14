@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
         preview: document.getElementById('certificatePreview'),
         fileInput: document.querySelector('input[name="certificadoVazioFile"]'),
         renderBtn: document.getElementById('renderCertificateBtn'),
-        nomeAluno: document.getElementById('draggableNomeAluno')
+        nomeAluno: document.getElementById('draggableNomeAluno'),
+        dataEmissao: document.getElementById('draggableDataEmissao') // ⭐ ADICIONAR
     };
 
     // Criar/recuperar input hidden para Base64
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const removeEditingStyles = () => {
         const saved = [];
 
+        // Preview container
         if (el.preview) {
             const orig = {
                 border: el.preview.style.border,
@@ -40,33 +42,38 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
-        if (el.nomeAluno) {
-            saved.push({
-                element: el.nomeAluno,
-                styles: { display: el.nomeAluno.style.display }
-            });
-            el.nomeAluno.style.display = 'none';
-        }
-
-        el.preview.querySelectorAll('.draggable-div[data-is-editing="true"]').forEach(div => {
+        // ⭐ Remover estilos de TODOS os draggables (incluindo nome e data)
+        el.preview.querySelectorAll('.draggable-field').forEach(div => {
             const orig = {
                 cursor: div.style.cursor,
                 padding: div.style.padding,
                 background: div.style.background,
+                backgroundColor: div.style.backgroundColor,
                 border: div.style.border,
                 borderRadius: div.style.borderRadius,
                 minWidth: div.style.minWidth,
-                minHeight: div.style.minHeight
+                minHeight: div.style.minHeight,
+                boxShadow: div.style.boxShadow,
+                outline: div.style.outline,
+                display: div.style.display
             };
             saved.push({ element: div, styles: orig });
+
+            // Adicionar classe para ajudar na captura
+            div.classList.add('pdf-capture');
+
             Object.assign(div.style, {
                 cursor: 'default',
                 padding: '0',
                 background: 'transparent',
+                backgroundColor: 'transparent',
                 border: 'none',
                 borderRadius: '0',
                 minWidth: 'auto',
-                minHeight: 'auto'
+                minHeight: 'auto',
+                boxShadow: 'none',
+                outline: 'none',
+                display: 'none'
             });
         });
 
@@ -74,6 +81,11 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     const restoreEditingStyles = (saved) => {
+        // Remover classes de captura
+        el.preview.querySelectorAll('.pdf-capture').forEach(div => {
+            div.classList.remove('pdf-capture');
+        });
+
         saved.forEach(({ element, styles }) => Object.assign(element.style, styles));
     };
 
@@ -83,9 +95,13 @@ document.addEventListener('DOMContentLoaded', function () {
             throw new Error('html2canvas ou jsPDF não carregados');
         }
 
+        console.log('🔄 Iniciando geração do PDF...');
         const saved = removeEditingStyles();
 
         try {
+            // ⭐ AGUARDAR APLICAÇÃO DOS ESTILOS
+            await new Promise(resolve => setTimeout(resolve, 100));
+
             const canvas = await html2canvas(el.preview, {
                 scale,
                 useCORS: true,
@@ -93,7 +109,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 logging: false,
                 backgroundColor: null,
                 imageTimeout: 0,
-                removeContainer: true
+                removeContainer: true,
+                ignoreElements: (element) => {
+                    // ⭐ IGNORAR TODOS OS ELEMENTOS DRAGGABLES
+                    const isDraggable = element.classList.contains('draggable-field') ||
+                        element.classList.contains('drag-handle') ||
+                        element.id === 'draggableNomeAluno' ||
+                        element.id === 'draggableDataEmissao';
+
+                    if (isDraggable) {
+                        console.log('🚫 Ignorando elemento:', element.id || element.className);
+                    }
+
+                    return isDraggable;
+                }
             });
 
             const w = canvas.width / scale;
@@ -108,6 +137,8 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             pdf.addImage(img, 'PNG', 0, 0, w, h, undefined, 'FAST');
+
+            console.log('✅ PDF gerado com sucesso');
             return pdf.output('dataurlstring');
 
         } finally {
@@ -182,6 +213,24 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
         }
     });
+
+    // ===== ESTILOS ADICIONAIS PARA GARANTIR OCULTAÇÃO =====
+    const style = document.createElement('style');
+    style.textContent = `
+        /* Estilos para impressão/captura do PDF */
+        .draggable-field.pdf-capture,
+        #draggableNomeAluno.pdf-capture,
+        #draggableDataEmissao.pdf-capture {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+        
+        .drag-handle {
+            pointer-events: none;
+        }
+    `;
+    document.head.appendChild(style);
 
     console.log('✅ PDF Generator Module carregado');
 });
