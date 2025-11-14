@@ -1,4 +1,4 @@
-// ===== CERT-NOME-ALUNO.JS - Configuração do nome do aluno no certificado =====
+// ===== CERT-NOME-ALUNO.JS - Com suporte à Data de Emissão =====
 document.addEventListener('DOMContentLoaded', function () {
     const el = {
         form: document.getElementById('certificateForm'),
@@ -16,7 +16,16 @@ document.addEventListener('DOMContentLoaded', function () {
         fontSize: document.getElementById('draggableFontSize'),
         fontColor: document.getElementById('draggableFontColor'),
         fontWeight: document.getElementById('draggableFontWeight'),
-        textAlign: document.getElementById('draggableTextAlign')
+        textAlign: document.getElementById('draggableTextAlign'),
+        // ⭐ NOVOS: Elementos da data
+        dataEmissaoDraggable: document.getElementById('draggableDataEmissao'),
+        dataEmissaoText: document.getElementById('dataEmissaoText'),
+        dataFont: document.getElementById('draggableDataFont'),
+        dataFontSize: document.getElementById('draggableDataFontSize'),
+        dataFontColor: document.getElementById('draggableDataFontColor'),
+        dataFontWeight: document.getElementById('draggableDataFontWeight'),
+        dataTextAlign: document.getElementById('draggableDataTextAlign'),
+        dataFormat: document.getElementById('draggableDataFormat')
     };
 
     if (!el.form || !el.container) {
@@ -30,12 +39,39 @@ document.addEventListener('DOMContentLoaded', function () {
         isDragging: false,
         isInitialized: false,
         baseFontSize: 24,
-        position: { x: 0, y: 0 }
+        position: { x: 0, y: 0 },
+        // ⭐ Estado da data
+        dataPosition: { x: 0, y: 0 },
+        dataInitialized: false
     };
 
     if (el.submitBtn) el.submitBtn.disabled = true;
 
-    // ===== AUTO-AJUSTE DE FONTE =====
+    // ===== FORMATAÇÃO DE DATA =====
+    const formatarData = (formato) => {
+        const hoje = new Date();
+        const dia = String(hoje.getDate()).padStart(2, '0');
+        const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+        const ano = hoje.getFullYear();
+
+        const mesesExtenso = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+            'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+        switch (formato) {
+            case 'dd/MM/yyyy':
+                return `${dia}/${mes}/${ano}`;
+            case 'dd-MM-yyyy':
+                return `${dia}-${mes}-${ano}`;
+            case 'dd de MMMM de yyyy':
+                return `${dia} de ${mesesExtenso[hoje.getMonth()]} de ${ano}`;
+            case 'MMMM/yyyy':
+                return `${mesesExtenso[hoje.getMonth()]}/${ano}`;
+            default:
+                return `${dia}/${mes}/${ano}`;
+        }
+    };
+
+    // ===== AUTO-AJUSTE DE FONTE (Nome) =====
     const autoAdjustFontSize = () => {
         if (state.isDragging || state.isLocked || !el.text || !el.draggable) return;
 
@@ -74,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(`📏 Font: ${state.baseFontSize}→${currentFontSize}px | Pos: ${state.position.x},${state.position.y}`);
     };
 
-    // ===== ATUALIZAR CONTEÚDO =====
+    // ===== ATUALIZAR CONTEÚDO (Nome) =====
     const updateContent = () => {
         if (!el.text) return;
 
@@ -105,7 +141,26 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-    // ===== DRAGGABLE =====
+    // ⭐ ATUALIZAR CONTEÚDO DA DATA
+    const updateDataContent = () => {
+        if (!el.dataEmissaoText) return;
+
+        const formato = el.dataFormat?.value || 'dd/MM/yyyy';
+        el.dataEmissaoText.textContent = formatarData(formato);
+
+        Object.assign(el.dataEmissaoText.style, {
+            fontFamily: el.dataFont?.value || 'Arial',
+            fontSize: (el.dataFontSize?.value || 12) + 'px',
+            color: el.dataFontColor?.value || '#000000',
+            fontWeight: el.dataFontWeight?.checked ? 'bold' : 'normal',
+            textAlign: el.dataTextAlign?.value || 'center',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
+        });
+    };
+
+    // ===== DRAGGABLE (Nome) =====
     const initializeDraggable = () => {
         if (!el.draggable || !window.interact || state.isInitialized) return;
 
@@ -164,16 +219,65 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         state.isInitialized = true;
-        console.log('✅ Draggable inicializado');
+        console.log('✅ Draggable (nome) inicializado');
     };
 
-    // ===== MOSTRAR DRAGGABLE =====
+    // ⭐ DRAGGABLE DA DATA
+    const initializeDataDraggable = () => {
+        if (!el.dataEmissaoDraggable || !window.interact || state.dataInitialized) return;
+
+        try {
+            interact(el.dataEmissaoDraggable).unset();
+        } catch (e) { }
+
+        interact(el.dataEmissaoDraggable).draggable({
+            inertia: false,
+            modifiers: [
+                interact.modifiers.restrictRect({
+                    restriction: 'parent',
+                    endOnly: false
+                })
+            ],
+            autoScroll: false,
+            listeners: {
+                start(e) {
+                    if (state.isLocked) return;
+                    e.target.classList.add('dragging');
+                    document.body.style.userSelect = 'none';
+                },
+                move(e) {
+                    if (state.isLocked) return;
+
+                    const x = (parseFloat(e.target.getAttribute('data-x')) || 0) + e.dx;
+                    const y = (parseFloat(e.target.getAttribute('data-y')) || 0) + e.dy;
+
+                    const transform = `translate(${x}px, ${y}px)`;
+                    e.target.style.transform = transform;
+                    e.target.setAttribute('data-x', x);
+                    e.target.setAttribute('data-y', y);
+                },
+                end(e) {
+                    e.target.classList.remove('dragging');
+                    document.body.style.userSelect = '';
+
+                    state.dataPosition = {
+                        x: parseFloat(e.target.getAttribute('data-x')) || 0,
+                        y: parseFloat(e.target.getAttribute('data-y')) || 0
+                    };
+                }
+            }
+        });
+
+        state.dataInitialized = true;
+        console.log('✅ Draggable (data) inicializado');
+    };
+
+    // ===== MOSTRAR DRAGGABLES =====
     window.showDraggableNomeAluno = () => {
         if (!el.draggable) return;
 
         el.draggable.style.display = 'block';
-        
-        // Corrigido: não usar optional chaining no lado esquerdo
+
         const positionInfo = document.getElementById('positionInfo');
         if (positionInfo) {
             positionInfo.style.display = 'block';
@@ -185,10 +289,23 @@ document.addEventListener('DOMContentLoaded', function () {
             el.draggable.setAttribute('data-y', 0);
         }
 
+        // ⭐ Mostrar data também
+        if (el.dataEmissaoDraggable) {
+            el.dataEmissaoDraggable.style.display = 'block';
+
+            if (!state.dataInitialized) {
+                el.dataEmissaoDraggable.style.transform = 'translate(0px, 0px)';
+                el.dataEmissaoDraggable.setAttribute('data-x', 0);
+                el.dataEmissaoDraggable.setAttribute('data-y', 0);
+            }
+        }
+
         updateContent();
+        updateDataContent();
 
         setTimeout(() => {
             if (!state.isInitialized) initializeDraggable();
+            if (!state.dataInitialized) initializeDataDraggable();
             if (!state.isLocked) autoAdjustFontSize();
         }, 150);
     };
@@ -196,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // ===== SALVAR CONFIG =====
     const saveConfig = () => {
         if (!el.draggable) {
-            alert('Primeiro faça upload do certificado e posicione o nome do aluno.');
+            alert('Primeiro faça upload do certificado e posicione os campos.');
             return;
         }
 
@@ -219,6 +336,24 @@ document.addEventListener('DOMContentLoaded', function () {
             textAlign: el.textAlign?.value || 'center'
         };
 
+        // ⭐ ADICIONAR CONFIG DA DATA
+        if (el.dataEmissaoDraggable) {
+            const dataRect = el.dataEmissaoDraggable.getBoundingClientRect();
+            const dataFontSize = parseFloat(window.getComputedStyle(el.dataEmissaoText).fontSize);
+
+            config.DataEmissao = {
+                top: Math.round(dataRect.top - parentRect.top) + 'px',
+                left: Math.round(dataRect.left - parentRect.left) + 'px',
+                width: Math.round(dataRect.width),
+                fontFamily: el.dataFont?.value || 'Arial',
+                fontSize: dataFontSize + 'px',
+                color: el.dataFontColor?.value || '#000000',
+                fontWeight: el.dataFontWeight?.checked ? 'bold' : 'regular',
+                textAlign: el.dataTextAlign?.value || 'center',
+                dateFormat: el.dataFormat?.value || 'dd/MM/yyyy'
+            };
+        }
+
         el.configInput.value = JSON.stringify(config);
         state.isLocked = true;
 
@@ -226,6 +361,13 @@ document.addEventListener('DOMContentLoaded', function () {
             borderColor: '#28a745',
             cursor: 'default'
         });
+
+        if (el.dataEmissaoDraggable) {
+            Object.assign(el.dataEmissaoDraggable.style, {
+                borderColor: '#28a745',
+                cursor: 'default'
+            });
+        }
 
         if (el.submitBtn) el.submitBtn.disabled = false;
 
@@ -239,12 +381,12 @@ document.addEventListener('DOMContentLoaded', function () {
             <i class="bi bi-check-circle-fill me-2"></i>Configuração salva com sucesso!
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         `;
-        
+
         const neoContainer = document.querySelector('.neo-container');
         if (neoContainer) {
             neoContainer.insertBefore(alert, neoContainer.firstChild);
         }
-        
+
         setTimeout(() => alert.remove(), 5000);
 
         console.log('💾 Config salva:', config);
@@ -258,18 +400,27 @@ document.addEventListener('DOMContentLoaded', function () {
         ctrl?.addEventListener('change', updateContent);
     });
 
+    // ⭐ Events da data
+    [el.dataFont, el.dataFontSize, el.dataFontColor, el.dataFontWeight, el.dataTextAlign, el.dataFormat].forEach(ctrl => {
+        ctrl?.addEventListener('input', updateDataContent);
+        ctrl?.addEventListener('change', updateDataContent);
+    });
+
     el.saveBtn?.addEventListener('click', saveConfig);
 
     el.toggleDraggables?.addEventListener('change', function () {
         if (el.draggable) {
             el.draggable.style.display = this.checked ? 'block' : 'none';
         }
+        if (el.dataEmissaoDraggable) {
+            el.dataEmissaoDraggable.style.display = this.checked ? 'block' : 'none';
+        }
     });
 
     el.form?.addEventListener('submit', function (e) {
         if (!el.configInput?.value) {
             e.preventDefault();
-            alert('Salve a configuração do nome do aluno antes de enviar.');
+            alert('Salve a configuração dos campos antes de enviar.');
             return false;
         }
     });
@@ -289,6 +440,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     el.draggable?.addEventListener('dragstart', e => e.preventDefault());
+    el.dataEmissaoDraggable?.addEventListener('dragstart', e => e.preventDefault());
 
-    console.log('✅ Nome Aluno Module carregado');
+    console.log('✅ Nome Aluno + Data Module carregado');
 });

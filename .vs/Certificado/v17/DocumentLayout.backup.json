@@ -1,10 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Felip\\Desktop\\Certificado\\",
+  "WorkspaceRootPath": "C:\\Users\\Felip\\Desktop\\teste\\Certificado-System\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C6CE82E9-2FAD-4CE1-A688-BAF4FDDF0AEE}|Certificado.csproj|c:\\users\\felip\\desktop\\certificado\\wwwroot\\js\\confignomealunocertificado.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{C6CE82E9-2FAD-4CE1-A688-BAF4FDDF0AEE}|Certificado.csproj|solutionrelative:wwwroot\\js\\confignomealunocertificado.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Felip\\Desktop\\Certificado\\wwwroot\\js\\configNomeAlunoCertificado.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -25,13 +24,11 @@
               "DocumentIndex": 0,
               "Title": "configNomeAlunoCertificado.js",
               "DocumentMoniker": "C:\\Users\\Felip\\Desktop\\Certificado\\wwwroot\\js\\configNomeAlunoCertificado.js",
-              "RelativeDocumentMoniker": "wwwroot\\js\\configNomeAlunoCertificado.js",
+              "RelativeDocumentMoniker": "..\\..\\Certificado\\wwwroot\\js\\configNomeAlunoCertificado.js",
               "ToolTip": "C:\\Users\\Felip\\Desktop\\Certificado\\wwwroot\\js\\configNomeAlunoCertificado.js",
-              "RelativeToolTip": "wwwroot\\js\\configNomeAlunoCertificado.js",
-              "ViewState": "AgIAAGABAAAAAAAAAAAmwHUBAABEAAAAAAAAAA==",
+              "RelativeToolTip": "..\\..\\Certificado\\wwwroot\\js\\configNomeAlunoCertificado.js",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-09T17:09:34.595Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-09T17:09:34.595Z"
             }
           ]
         }

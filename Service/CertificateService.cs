@@ -455,6 +455,78 @@ namespace AuthDemo.Services
 
                                     document.Add(paragraph);
                                     Console.WriteLine($"✅ Texto adicionado: X={x}, Y={pdfY}, Width={paragraphWidth}, Size={fontSize}px, Align={alignment}");
+
+                                    // ⭐ ADICIONAR DATA ATUAL (se configurada)
+                                    if (config.DataEmissao != null && config.DataEmissao.Width > 0)
+                                    {
+                                        // Formata a data atual no formato brasileiro
+                                        string dataFormatada;
+                                        if (!string.IsNullOrEmpty(config.DataEmissao.DateFormat))
+                                        {
+                                            dataFormatada = DateTime.UtcNow.AddHours(-3).ToString(config.DataEmissao.DateFormat);
+                                        }
+                                        else
+                                        {
+                                            dataFormatada = DateTime.UtcNow.AddHours(-3).ToString("dd/MM/yyyy");
+                                        }
+
+                                        float dataX = float.TryParse(
+                                            (config.DataEmissao.Left ?? "0").Replace("px", "").Replace(",", "."),
+                                            System.Globalization.NumberStyles.Any,
+                                            System.Globalization.CultureInfo.InvariantCulture,
+                                            out var dx) ? dx : 50f;
+
+                                        float dataY = float.TryParse(
+                                            (config.DataEmissao.Top ?? "0").Replace("px", "").Replace(",", "."),
+                                            System.Globalization.NumberStyles.Any,
+                                            System.Globalization.CultureInfo.InvariantCulture,
+                                            out var dy) ? dy : 100f;
+
+                                        float dataFontSize = float.TryParse(
+                                            (config.DataEmissao.FontSize ?? "12px").Replace("px", "").Replace(",", "."),
+                                            System.Globalization.NumberStyles.Any,
+                                            System.Globalization.CultureInfo.InvariantCulture,
+                                            out var dfs) ? dfs : 12f;
+
+                                        bool dataIsBold = (config.DataEmissao.FontWeight ?? "regular").ToLower() == "bold";
+
+                                        PdfFont dataFont = dataIsBold
+                                            ? PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD)
+                                            : PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+
+                                        float dataPdfY = pageSize.GetHeight() - dataY - dataFontSize - 17f;
+
+                                        DeviceRgb dataColor = ParseColor(config.DataEmissao.Color ?? "black");
+
+                                        var dataParagraph = new Paragraph(dataFormatada)
+                                            .SetFont(dataFont)
+                                            .SetFontSize(dataFontSize)
+                                            .SetFontColor(dataColor)
+                                            .SetFixedPosition(dataX, dataPdfY, config.DataEmissao.Width)
+                                            .SetWidth(config.DataEmissao.Width)
+                                            .SetMaxWidth(config.DataEmissao.Width)
+                                            .SetMargin(0)
+                                            .SetPadding(0);
+
+                                        dataParagraph.SetProperty(Property.NO_SOFT_WRAP_INLINE, true);
+
+                                        var dataAlignment = (config.DataEmissao.TextAlign ?? "center").ToLower();
+                                        switch (dataAlignment)
+                                        {
+                                            case "center":
+                                                dataParagraph.SetTextAlignment(TextAlignment.CENTER);
+                                                break;
+                                            case "right":
+                                                dataParagraph.SetTextAlignment(TextAlignment.RIGHT);
+                                                break;
+                                            default:
+                                                dataParagraph.SetTextAlignment(TextAlignment.LEFT);
+                                                break;
+                                        }
+
+                                        document.Add(dataParagraph);
+                                        Console.WriteLine($"✅ Data adicionada: {dataFormatada} | X={dataX}, Y={dataPdfY}, Size={dataFontSize}px");
+                                    }
                                 }
                             }
                         }
@@ -617,6 +689,21 @@ namespace AuthDemo.Services
             return new DeviceRgb(0, 0, 0);
         }
 
+        // Adicione esta classe dentro de NomeAlunoConfig
+        public class DataEmissaoFieldConfig
+        {
+            public string Top { get; set; } = "0";
+            public string Left { get; set; } = "0";
+            public int Width { get; set; } = 200;
+            public string FontFamily { get; set; } = "Arial";
+            public string FontSize { get; set; } = "12px";
+            public string Color { get; set; } = "black";
+            public string FontWeight { get; set; } = "regular";
+            public string TextAlign { get; set; } = "center";
+            public string DateFormat { get; set; } = "dd/MM/yyyy"; // Formato da data
+        }
+
+        // Modifique a classe NomeAlunoConfig para incluir:
         public class NomeAlunoConfig
         {
             public string Top { get; set; } = "0";
@@ -629,6 +716,9 @@ namespace AuthDemo.Services
             public string Color { get; set; } = "black";
             public string FontWeight { get; set; } = "regular";
             public string TextAlign { get; set; } = "center";
+
+            // ⭐ NOVO: Configuração da data
+            public DataEmissaoFieldConfig DataEmissao { get; set; } = new DataEmissaoFieldConfig();
         }
 
         public class NumberOrStringToStringConverter : System.Text.Json.Serialization.JsonConverter<string>

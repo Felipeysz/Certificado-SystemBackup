@@ -214,6 +214,43 @@
         transform: scale(1.02);
     }
 
+/* ===== Estilo específico para o campo de Data de Emissão ===== */
+#draggableDataEmissao {
+    border: 2px dashed #28a745 !important;
+    background-color: rgba(40, 167, 69, 0.05) !important;
+    min-width: 150px !important;
+    padding: 8px 12px !important;
+}
+
+    #draggableDataEmissao:hover {
+        border-color: #1e7e34 !important;
+        background-color: rgba(40, 167, 69, 0.1) !important;
+    }
+
+    #draggableDataEmissao.dragging {
+        border-color: #1e7e34 !important;
+        background-color: rgba(40, 167, 69, 0.15) !important;
+        box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3) !important;
+    }
+
+    #draggableDataEmissao .drag-handle {
+        background-color: #28a745 !important;
+    }
+
+        #draggableDataEmissao .drag-handle:hover {
+            background-color: #1e7e34 !important;
+        }
+
+    /* Quando os campos estão salvos */
+    #draggableDataEmissao[style*="border-color: rgb(40, 167, 69)"] {
+        cursor: default !important;
+        opacity: 0.7;
+    }
+
+        #draggableDataEmissao[style*="border-color: rgb(40, 167, 69)"] .drag-handle {
+            display: none;
+        }
+
 /* ===== Position Info ===== */
 #positionInfo {
     border: 1px solid var(--border-light);

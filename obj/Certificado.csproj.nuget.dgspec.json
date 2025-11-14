@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado.csproj": {}
+    "C:\\Users\\Felip\\Desktop\\teste\\Certificado-System\\Certificado.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado.csproj": {
+    "C:\\Users\\Felip\\Desktop\\teste\\Certificado-System\\Certificado.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado.csproj",
+        "projectUniqueName": "C:\\Users\\Felip\\Desktop\\teste\\Certificado-System\\Certificado.csproj",
         "projectName": "Certificado",
-        "projectPath": "C:\\Users\\Felip\\Desktop\\Certificado\\Certificado.csproj",
+        "projectPath": "C:\\Users\\Felip\\Desktop\\teste\\Certificado-System\\Certificado.csproj",
         "packagesPath": "C:\\Users\\Felip\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Felip\\Desktop\\Certificado\\obj\\",
+        "outputPath": "C:\\Users\\Felip\\Desktop\\teste\\Certificado-System\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

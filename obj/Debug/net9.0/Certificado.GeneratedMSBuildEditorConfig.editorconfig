@@ -17,93 +17,93 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Certificado
 build_property.RootNamespace = Certificado
-build_property.ProjectDir = C:\Users\Felip\Desktop\Certificado\
+build_property.ProjectDir = C:\Users\Felip\Desktop\teste\Certificado-System\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Felip\Desktop\Certificado
+build_property.MSBuildProjectDirectory = C:\Users\Felip\Desktop\teste\Certificado-System
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Auth/Login.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Auth/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Certificados/Create.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Certificados/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2VydGlmaWNhZG9zXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Certificados/EnviarAluno.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Certificados/EnviarAluno.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2VydGlmaWNhZG9zXEVudmlhckFsdW5vLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Certificados/_CertificateFieldsPartial.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Certificados/_CertificateFieldsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2VydGlmaWNhZG9zXF9DZXJ0aWZpY2F0ZUZpZWxkc1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Certificados/_RequiredFieldsPartial.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Certificados/_RequiredFieldsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2VydGlmaWNhZG9zXF9SZXF1aXJlZEZpZWxkc1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/ErrorPage/Index.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/ErrorPage/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JQYWdlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Home/Index.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Shared/Error.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Trilhas/Create.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Trilhas/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJpbGhhc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Trilhas/Detalhes.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Trilhas/Detalhes.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJpbGhhc1xEZXRhbGhlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Trilhas/Edit.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Trilhas/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJpbGhhc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Trilhas/Erro.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Trilhas/Erro.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJpbGhhc1xFcnJvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Trilhas/Gerar.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Trilhas/Gerar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJpbGhhc1xHZXJhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Trilhas/Index.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Trilhas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJpbGhhc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Trilhas/Publicas.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Trilhas/Publicas.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJpbGhhc1xQdWJsaWNhcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Users/Create.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Users/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/_ViewImports.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/_ViewStart.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Felip/Desktop/Certificado/Views/Shared/_Layout.cshtml]
+[C:/Users/Felip/Desktop/teste/Certificado-System/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-zoudamawqq
