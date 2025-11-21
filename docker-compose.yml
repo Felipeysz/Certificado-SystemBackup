@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: certificado_api
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+      # Caso queira sobrescrever dentro do compose
+      # ASPNETCORE_URLS: "http://0.0.0.0:8080"
+    volumes:
+      - ./keys:/app/keys
+
+  postgres:
+    image: postgres:16
+    container_name: certificado_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: certificado_db
+      POSTGRES_USER: certificado_user
+      POSTGRES_PASSWORD: certificado_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: certificado_pgadmin
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "8081:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  postgres_data:
+  pgadmin_data:
