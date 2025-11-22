@@ -10,13 +10,11 @@ services:
     depends_on:
       - postgres
     ports:
-      - "8080:8080"
+      - "80:8080"
     env_file:
       - .env
     environment:
       ASPNETCORE_ENVIRONMENT: "Production"
-      # Caso queira sobrescrever dentro do compose
-      # ASPNETCORE_URLS: "http://0.0.0.0:8080"
     volumes:
       - ./keys:/app/keys
 
